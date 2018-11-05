@@ -1,0 +1,42 @@
+Language: Cpp
+BasedOnStyle: LLVM
+AccessModifierOffset: 0
+AlignAfterOpenBracket: DontAlign
+AlignEscapedNewlines: DontAlign
+AlignOperands: false
+AlignTrailingComments: false
+AllowAllParametersOfDeclarationOnNextLine: false
+AllowShortFunctionsOnASingleLine: None
+BreakBeforeBinaryOperators: NonAssignment
+BreakBeforeBraces: Custom
+BreakBeforeTernaryOperators: true
+BreakConstructorInitializers: AfterColon
+BraceWrapping:
+  AfterClass: true
+  AfterControlStatement: false
+  AfterEnum: true
+  AfterFunction: true
+  AfterNamespace: true
+  AfterObjCDeclaration: true
+  AfterStruct: true
+  AfterUnion: true
+  AfterExternBlock: false
+  BeforeCatch: false
+  BeforeElse: false
+  IndentBraces: false
+  SplitEmptyFunction: true
+  SplitEmptyRecord: true
+  SplitEmptyNamespace: true
+ColumnLimit: 120
+ConstructorInitializerIndentWidth: 4
+ContinuationIndentWidth: 4
+FixNamespaceComments: false
+IndentWidth: 4
+JavaScriptQuotes: Single
+KeepEmptyLinesAtTheStartOfBlocks: false
+ObjCBlockIndentWidth: 8
+SpaceAfterTemplateKeyword: false
+SpacesInContainerLiterals: false
+TabWidth: 4
+PointerAlignment: Left
+UseTab: ForContinuationAndIndentation

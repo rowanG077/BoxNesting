@@ -1,0 +1,20 @@
+#pragma once
+
+/** Defines the project name */
+#define @PROJECT_NAME_UPPER@_NAME "@PROJECT_NAME@"
+/** Defines the project description */
+#define @PROJECT_NAME_UPPER@_DESCRIPTION "@PROJECT_DESCRIPTION@"
+/** Defines the project author */
+#define @PROJECT_NAME_UPPER@_AUTHOR "@PROJECT_AUTHOR@"
+/** Defines the human-readable project version string (e.g. a.b.c.d-123+) */
+#define @PROJECT_NAME_UPPER@_VERSION "@PROJECT_VERSION@"
+/** Defines the project major version number */
+#define @PROJECT_NAME_UPPER@_VERSION_MAJOR @PROJECT_VERSION_MAJOR@
+/** Defines the project major version number */
+#define @PROJECT_NAME_UPPER@_VERSION_MINOR @PROJECT_VERSION_MINOR@
+/** Defines the project major patch number */
+#define @PROJECT_NAME_UPPER@_VERSION_PATCH @PROJECT_VERSION_PATCH@
+/** Defines the project e-mail address */
+#define @PROJECT_NAME_UPPER@_MAIL "@PROJECT_MAIL@"
+/** Defines the project's copyright */
+#define @PROJECT_NAME_UPPER@_COPYRIGHT "@PROJECT_COPYRIGHT@"
