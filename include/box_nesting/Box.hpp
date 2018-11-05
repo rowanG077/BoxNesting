@@ -52,12 +52,10 @@ public:
 	/**
 	 * @brief Construct a new Box object
 	 *
-	 * @param x The length of the box in the x-direction
-	 * @param y The length of the box in the y-direction
-	 * @param z The length of the box in the z-direction
+	 * @param sideLengths The length of the sides of the box in each dimensions
 	 * @return A new Box object
 	 */
-	Box(double x, double y, double z);
+	explicit Box(const std::array<double, 3>& sideLengths);
 
 	/**
 	 * @brief Check if this box can nest inside other box
@@ -66,6 +64,16 @@ public:
 	 * @return True if this box can nest inside the passed box. False otherwise
 	 */
 	bool isNestable(const Box& b) const;
+
+	/**
+	 * @brief Get the side lengths of the box.
+	 * 
+	 * @return array containing the side lengths ordered from smallest to largest.
+	 */
+	const std::array<double, 3>& getSideLengths() const
+	{
+		return this->sideLengths;
+	}
 
 private:
 	/**

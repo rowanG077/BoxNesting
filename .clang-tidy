@@ -53,7 +53,7 @@ CheckOptions:
   - key: readability-identifier-naming.LocalVariableCase
     value: camelBack
   - key: readability-identifier-naming.StaticConstantCase
-    value: UPPER_CASE
+    value: camelBack
   - key: readability-identifier-naming.StaticVariableCase
     value: camelBack
   - key: readability-identifier-naming.ConstantCase
