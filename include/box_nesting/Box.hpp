@@ -67,7 +67,7 @@ public:
 
 	/**
 	 * @brief Get the side lengths of the box.
-	 * 
+	 *
 	 * @return array containing the side lengths ordered from smallest to largest.
 	 */
 	const std::array<double, 3>& getSideLengths() const
