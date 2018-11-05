@@ -1,4 +1,4 @@
-#include <box_nesting/derived.hpp>
+#include <box_nesting/Box.hpp>
 #include <box_nesting/version.hpp>
 
 #include <cstdlib>
@@ -15,9 +15,6 @@ int main(int argc, char** argv)
 	}
 
 	std::cout << std::flush;
-
-	::derived der;
-	der.init();
 
 	std::cout << "project info:\n"
 			  << "\tname: " << BOX_NESTING_NAME << '\n'

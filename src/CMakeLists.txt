@@ -1,6 +1,6 @@
 # build code as object library for easier linking to tests
 add_library(${PROJECT_NAME}_obj OBJECT
-	derived.cpp)
+	Box.cpp)
 
 add_executable(${PROJECT_NAME}
 	main.cpp
