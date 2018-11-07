@@ -71,8 +71,9 @@ SCENARIO("Parsing box specifcations from inputStream")
 		WHEN("parsing a specification which is outside of the range of a double")
 		{
 			std::stringstream stream;
-			stream << "1" << std::endl << std::fixed << "9" << std::numeric_limits<double>::max() << " "
-				<< validLength << " " << validLength << std::endl;
+			stream << "1" << std::endl
+				   << std::fixed << "9" << std::numeric_limits<double>::max() << " " << validLength << " "
+				   << validLength << std::endl;
 
 			THEN("a ParserError is thrown")
 			{

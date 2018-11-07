@@ -71,10 +71,7 @@ public:
 	 *
 	 * @return array containing the side lengths ordered from smallest to largest
 	 */
-	[[nodiscard]] const std::array<double, 3>& getSideLengths() const
-	{
-		return this->sideLengths;
-	}
+	[[nodiscard]] const std::array<double, 3>& getSideLengths() const { return this->sideLengths; }
 
 	/**
 	 * @brief The minimum length that a side of a box may have

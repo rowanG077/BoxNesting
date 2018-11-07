@@ -12,8 +12,8 @@ Box::Box(const std::array<double, 3>& sideLengths) : sideLengths(sideLengths)
 	for (auto l : this->sideLengths) {
 		if (l <= Box::minLength || l >= Box::maxLength) {
 			std::stringstream ss;
-			ss << "Length of a side of a box is not between allowed range: (" 
-				<< Box::minLength << "," << Box::maxLength << ")";
+			ss << "Length of a side of a box is not between allowed range: (" << Box::minLength << "," << Box::maxLength
+			   << ")";
 			throw std::invalid_argument(ss.str());
 		}
 	}

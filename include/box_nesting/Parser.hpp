@@ -70,7 +70,7 @@ private:
 
 	 * @throw ParserError Parsing failed due to malformed input
 	 * @throw std::invalid_argument Parsing succeeded but the box specification is not valid
-	 * 
+	 *
 	 * @param inputStream The inputStream to read from
 	 * @return Instantiated box object
 	 */
