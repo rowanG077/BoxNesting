@@ -59,7 +59,7 @@ public:
 	 *
 	 * @return A set of boxes
 	 */
-	static std::vector<Box> getBoxes(std::istream& inputStream);
+	[[nodiscard]] static std::vector<Box> getBoxes(std::istream& inputStream);
 
 private:
 	/**
@@ -70,6 +70,6 @@ private:
 	 * @param inputStream The inputStream to read from
 	 * @return Instantiated box object
 	 */
-	static Box parseBoxSpecification(std::istream& inputStream);
+	[[nodiscard]] static Box parseBoxSpecification(std::istream& inputStream);
 };
 } // BoxNesting

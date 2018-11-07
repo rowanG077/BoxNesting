@@ -64,14 +64,14 @@ public:
 	 * @param b The box to check if this box can nest inside.
 	 * @return True if this box can nest inside the passed box. False otherwise
 	 */
-	bool isNestable(const Box& b) const;
+	[[nodiscard]] bool isNestable(const Box& b) const;
 
 	/**
 	 * @brief Get the side lengths of the box.
 	 *
 	 * @return array containing the side lengths ordered from smallest to largest.
 	 */
-	const std::array<double, 3>& getSideLengths() const
+	[[nodiscard]] const std::array<double, 3>& getSideLengths() const
 	{
 		return this->sideLengths;
 	}
@@ -92,7 +92,7 @@ public:
 	 * @brief Static assert on the assumption any box can only contain a single box nested inside.
 	 */
 	static_assert(minLength * 2 >= maxLength,
-		"More then 1 box can be fit inside a larger box."
+		"More then 1 box can be fit inside a larger box. "
 		"The algorithm may only be used in the case that any box can contain a single box.");
 
 private:

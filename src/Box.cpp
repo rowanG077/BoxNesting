@@ -1,6 +1,7 @@
 #include <box_nesting/Box.hpp>
 
 #include <algorithm>
+#include <sstream>
 
 namespace BoxNesting
 {
@@ -10,7 +11,10 @@ Box::Box(const std::array<double, 3>& sideLengths) : sideLengths(sideLengths)
 
 	for (auto l : this->sideLengths) {
 		if (l <= Box::minLength || l >= Box::maxLength) {
-			throw std::invalid_argument("Dimensions of box are not within 0.5m to 1m range.");
+			std::stringstream ss;
+			ss << "Length of a side of a box is not between allowed range: (" 
+				<< Box::minLength << "," << Box::maxLength << ")";
+			throw std::invalid_argument(ss.str());
 		}
 	}
 }
