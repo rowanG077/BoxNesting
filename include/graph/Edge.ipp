@@ -5,7 +5,7 @@ namespace Graph
 
 template <class T>
 Edge<T>::Edge(const Vertex<T>& des, double w):
-    destination(des), weight(w)
+    destination(des), weight(w), visited(false)
 {
 }
 

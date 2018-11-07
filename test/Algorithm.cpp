@@ -15,12 +15,11 @@ SCENARIO("Running the 'graph creation from a set of boxes' function")
 		boxes.emplace_back(b);
 		boxes.emplace_back(c);
 
-		Graph::Graph<BoxNesting::Box> graph;
 		BoxNesting::Algorithm boxNestingAlgorithm;
 
 		WHEN("Creating a graph from the set of boxes")
 		{
-			boxNestingAlgorithm.createGraphFromBoxes(graph, boxes);
+			auto graph = boxNestingAlgorithm.createGraphFromBoxes(boxes);
 
 			THEN("There can only be edges from vertex a to b if a nests inside b")
 			{
