@@ -7,7 +7,7 @@
 
 int main([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
 {
-	auto boxes = BoxNesting::Parser::getBoxes(std::cin);
+	const auto boxes = BoxNesting::Parser::getBoxes(std::cin);
 
 	return EXIT_SUCCESS;
 }

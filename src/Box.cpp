@@ -9,7 +9,7 @@ Box::Box(const std::array<double, 3>& sideLengths) : sideLengths(sideLengths)
 	std::sort(this->sideLengths.begin(), this->sideLengths.end());
 
 	for (auto l : this->sideLengths) {
-		if (l <= 0.5 || l >= 1.0) {
+		if (l <= Box::minLength || l >= Box::maxLength) {
 			throw std::invalid_argument("Dimensions of box are not within 0.5m to 1m range.");
 		}
 	}

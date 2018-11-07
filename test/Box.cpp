@@ -1,57 +1,63 @@
 #include <box_nesting/Box.hpp>
 #include <catch2/catch.hpp>
 
-SCENARIO("Box construction and valid sizes")
+SCENARIO("Box construction and valid side lengths")
 {
+	const auto minLength = BoxNesting::Box::minLength;
+	const auto maxLength = BoxNesting::Box::maxLength;
+	const auto validLength = (minLength + maxLength) / 2;
+
 	GIVEN("a contructor for a box")
 	{
-		WHEN("constructing box with a side less then 0.5")
+		WHEN("constructing box with a side less then or equal to the minimum length")
 		{
 			THEN("std::invalid_argument is thrown")
 			{
-				REQUIRE_THROWS_AS(BoxNesting::Box({0.50, 0.51, 0.51}), std::invalid_argument);
-				REQUIRE_THROWS_AS(BoxNesting::Box({0.51, 0.50, 0.51}), std::invalid_argument);
-				REQUIRE_THROWS_AS(BoxNesting::Box({0.51, 0.51, 0.50}), std::invalid_argument);
-				REQUIRE_THROWS_AS(BoxNesting::Box({0.50, 0.50, 0.50}), std::invalid_argument);
+				REQUIRE_THROWS_AS(BoxNesting::Box({minLength, minLength + 0.01, minLength + 0.01}), std::invalid_argument);
+				REQUIRE_THROWS_AS(BoxNesting::Box({minLength + 0.01, minLength, minLength + 0.01}), std::invalid_argument);
+				REQUIRE_THROWS_AS(BoxNesting::Box({minLength + 0.01, minLength + 0.01, minLength}), std::invalid_argument);
+				REQUIRE_THROWS_AS(BoxNesting::Box({minLength, minLength, minLength}), std::invalid_argument);
 			}
 		}
 
-		WHEN("constructing box with all sides between between 0.5 and 1.0")
+		WHEN("constructing box with all sides between between the minimum and maximum length")
 		{
 			THEN("box is constructed")
 			{
-				REQUIRE_NOTHROW(BoxNesting::Box({0.99, 0.99, 0.99}));
-				REQUIRE_NOTHROW(BoxNesting::Box({0.6, 0.6, 0.6}));
-				REQUIRE_NOTHROW(BoxNesting::Box({0.6, 0.6, 0.51}));
-				REQUIRE_NOTHROW(BoxNesting::Box({0.6, 0.51, 0.6}));
-				REQUIRE_NOTHROW(BoxNesting::Box({0.55, 0.6, 0.6}));
-				REQUIRE_NOTHROW(BoxNesting::Box({0.55, 0.55, 0.55}));
-				REQUIRE_NOTHROW(BoxNesting::Box({0.51, 0.51, 0.51}));
+				REQUIRE_NOTHROW(BoxNesting::Box({maxLength - 0.01, maxLength - 0.01, maxLength - 0.01}));
+				REQUIRE_NOTHROW(BoxNesting::Box({validLength, validLength, validLength}));
+				REQUIRE_NOTHROW(BoxNesting::Box({validLength, validLength, minLength + 0.01}));
+				REQUIRE_NOTHROW(BoxNesting::Box({validLength, minLength + 0.01, validLength}));
+				REQUIRE_NOTHROW(BoxNesting::Box({minLength + 0.01, minLength + 0.01, minLength + 0.01}));
 			}
 
 			THEN("box lengths are ordered from small to large")
 			{
-				const BoxNesting::Box a({0.53, 0.51, 0.52});
-				const BoxNesting::Box b({0.65, 0.66, 0.66});
+				const auto l1 = minLength + 0.01;
+				const auto l2 = minLength + 0.02;
+				const auto l3 = minLength + 0.03;
 
-				REQUIRE(a.getSideLengths().at(0) == Approx(0.51));
-				REQUIRE(a.getSideLengths().at(1) == Approx(0.52));
-				REQUIRE(a.getSideLengths().at(2) == Approx(0.53));
+				const BoxNesting::Box a({l1, l2, l3});
+				const BoxNesting::Box b({l2, l3, l1});
 
-				REQUIRE(b.getSideLengths().at(0) == Approx(0.65));
-				REQUIRE(b.getSideLengths().at(1) == Approx(0.66));
-				REQUIRE(b.getSideLengths().at(2) == Approx(0.66));
+				REQUIRE(a.getSideLengths().at(0) == Approx(l1));
+				REQUIRE(a.getSideLengths().at(1) == Approx(l2));
+				REQUIRE(a.getSideLengths().at(2) == Approx(l3));
+
+				REQUIRE(b.getSideLengths().at(0) == Approx(l1));
+				REQUIRE(b.getSideLengths().at(1) == Approx(l2));
+				REQUIRE(b.getSideLengths().at(2) == Approx(l3));
 			}
 		}
 
-		WHEN("constructing box with a side more then or equal 1.0")
+		WHEN("constructing box with a side more then or equal to the maximum length")
 		{
 			THEN("std::invalid_argument is thrown")
 			{
-				REQUIRE_THROWS_AS(BoxNesting::Box({1.00, 0.99, 0.99}), std::invalid_argument);
-				REQUIRE_THROWS_AS(BoxNesting::Box({0.99, 1.00, 0.99}), std::invalid_argument);
-				REQUIRE_THROWS_AS(BoxNesting::Box({0.99, 0.99, 1.00}), std::invalid_argument);
-				REQUIRE_THROWS_AS(BoxNesting::Box({1.00, 1.00, 1.00}), std::invalid_argument);
+				REQUIRE_THROWS_AS(BoxNesting::Box({maxLength, maxLength - 0.01, maxLength - 0.01}), std::invalid_argument);
+				REQUIRE_THROWS_AS(BoxNesting::Box({maxLength - 0.01, maxLength, maxLength - 0.01}), std::invalid_argument);
+				REQUIRE_THROWS_AS(BoxNesting::Box({maxLength - 0.01, maxLength - 0.01, maxLength}), std::invalid_argument);
+				REQUIRE_THROWS_AS(BoxNesting::Box({maxLength, maxLength, maxLength}), std::invalid_argument);
 			}
 		}
 	}
@@ -59,14 +65,18 @@ SCENARIO("Box construction and valid sizes")
 
 SCENARIO("Boxes can nest inside another if their dimensions allow it", "[Box]")
 {
+	const auto minLength = BoxNesting::Box::minLength;
+	const auto maxLength = BoxNesting::Box::maxLength;
+	const auto validLength = (minLength + maxLength) / 2;
+
 	GIVEN("a set of boxes")
 	{
-		BoxNesting::Box a({0.6, 0.6, 0.6});
-		BoxNesting::Box b({0.6, 0.6, 0.51});
-		BoxNesting::Box c({0.6, 0.51, 0.6});
-		BoxNesting::Box d({0.55, 0.6, 0.6});
-		BoxNesting::Box e({0.55, 0.55, 0.55});
-		BoxNesting::Box f({0.51, 0.51, 0.51});
+		BoxNesting::Box a({validLength, validLength, validLength});
+		BoxNesting::Box b({validLength, validLength, minLength + 0.01});
+		BoxNesting::Box c({validLength, minLength + 0.01, validLength});
+		BoxNesting::Box d({validLength - 0.01, validLength, validLength});
+		BoxNesting::Box e({validLength - 0.01, validLength - 0.01, validLength - 0.01});
+		BoxNesting::Box f({minLength + 0.01, minLength + 0.01, minLength + 0.01});
 
 		THEN("they can nest inside eachother if their dimensions allow it")
 		{
