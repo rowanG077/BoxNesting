@@ -1,6 +1,8 @@
 #include <box_nesting/Parser.hpp>
 #include <catch2/catch.hpp>
 
+#include <cstddef>
+#include <limits>
 #include <sstream>
 
 SCENARIO("Parsing box specifcations from inputStream")
@@ -49,7 +51,29 @@ SCENARIO("Parsing box specifcations from inputStream")
 		WHEN("parsing the first line and a very very large number is present")
 		{
 			std::stringstream stream;
-			stream << "99999999999999999999999999999999999999" << std::endl;
+			stream << "9" << std::numeric_limits<std::uint64_t>::max() << std::endl;
+			THEN("a ParserError is thrown")
+			{
+				REQUIRE_THROWS_AS(BoxNesting::Parser::getBoxes(stream), BoxNesting::ParserError);
+			}
+		}
+
+		WHEN("parsing the first line and no number is present")
+		{
+			std::stringstream stream;
+			stream << "foobar" << std::endl;
+			THEN("a ParserError is thrown")
+			{
+				REQUIRE_THROWS_AS(BoxNesting::Parser::getBoxes(stream), BoxNesting::ParserError);
+			}
+		}
+
+		WHEN("parsing a specification which is outside of the range of a double")
+		{
+			std::stringstream stream;
+			stream << "1" << std::endl << std::fixed << "9" << std::numeric_limits<double>::max() << " "
+				<< validLength << " " << validLength << std::endl;
+
 			THEN("a ParserError is thrown")
 			{
 				REQUIRE_THROWS_AS(BoxNesting::Parser::getBoxes(stream), BoxNesting::ParserError);
