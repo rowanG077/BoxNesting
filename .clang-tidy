@@ -1,4 +1,4 @@
-Checks: '*,-fuchsia-default-arguments,-google-readability-namespace-comments,-hicpp-deprecated-headers,-llvm-header-guard,-llvm-namespace-comment,-modernize-deprecated-headers'
+Checks: '*,-fuchsia-default-arguments,-google-readability-namespace-comments,-hicpp-deprecated-headers,-llvm-header-guard,-llvm-namespace-comment,-modernize-deprecated-headers,-fuchsia-overloaded-operator'
 WarningsAsErrors: ''
 HeaderFilterRegex: '.*'
 AnalyzeTemporaryDtors: false
