@@ -1,6 +1,7 @@
 #pragma once
 
 #include <array>
+#include <type_traits>
 
 /**
  * @brief Contains code for the boxnesting problem
@@ -19,31 +20,31 @@ public:
 	Box() = delete;
 
 	/**
-	 * Default virtual destructor.
+	 * Default virtual destructor
 	 */
 	virtual ~Box() = default;
 
 	/**
-	 * Default copy constructor.
+	 * Default copy constructor
 	 * \param b
 	 */
 	Box(const Box& b) = default;
 
 	/**
-	 * Default move constructor.
+	 * Default move constructor
 	 * \param b
 	 */
 	Box(Box&& b) = default;
 
 	/**
-	 * Default copy assignment operator.
+	 * Default copy assignment operator
 	 * \param b
 	 * \return
 	 */
 	Box& operator=(const Box& b) = default;
 
 	/**
-	 * Default move assignment operator.
+	 * Default move assignment operator
 	 * \param b
 	 * \return
 	 */
@@ -60,20 +61,39 @@ public:
 	/**
 	 * @brief Check if this box can nest inside other box
 	 *
-	 * @param b The box to check if this box can nest inside.
-	 * @return True if this box can nest inside the passed box. False otherwise
+	 * @param b The box to check if this box can nest inside
+	 * @return True if this box can nest inside the passed box, False otherwise
 	 */
-	bool isNestable(const Box& b) const;
+	[[nodiscard]] bool isNestable(const Box& b) const;
 
 	/**
-	 * @brief Get the side lengths of the box.
+	 * @brief Get the side lengths of the box
 	 *
-	 * @return array containing the side lengths ordered from smallest to largest.
+	 * @return array containing the side lengths ordered from smallest to largest
 	 */
-	const std::array<double, 3>& getSideLengths() const
+	[[nodiscard]] const std::array<double, 3>& getSideLengths() const
 	{
 		return this->sideLengths;
 	}
+
+	/**
+	 * @brief The minimum length that a side of a box may have
+	 * 		  Is non-inclusive so the length x > minLength
+	 */
+	static constexpr double minLength = 0.5;
+
+	/**
+	 * @brief The maximum length that a side of a box may have
+	 * 		  Is non-inclusive so the length x < maxLength
+	 */
+	static constexpr double maxLength = 1.0;
+
+	/**
+	 * @brief Static assert on the assumption any box can only contain a single box nested inside
+	 */
+	static_assert(minLength * 2 >= maxLength,
+		"More then 1 box can be fit inside a larger box. "
+		"The algorithm may only be used in the case that any box can contain a single box.");
 
 private:
 	/**

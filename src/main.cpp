@@ -5,8 +5,9 @@
 #include <cstdlib>
 #include <iostream>
 
-int main([[maybe_unused]] int argc, [[maybe_unused]] char **argv) {
-  auto boxes = BoxNesting::Parser::getBoxes(std::cin);
+int main([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
+{
+	const auto boxes = BoxNesting::Parser::getBoxes(std::cin);
 
   BoxNesting::Algorithm boxNestingAlgorithm;
 

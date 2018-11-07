@@ -1,7 +1,7 @@
 #pragma once
 
 #include <exception>
-#include <optional>
+#include <stdexcept>
 #include <string>
 
 /**
@@ -12,7 +12,7 @@ namespace BoxNesting
 /**
  * @brief Exception that is thrown when error occurs during parsing
  */
-class ParserError : public std::runtime_error
+struct ParserError : public std::runtime_error
 {
 public:
 	/**
@@ -21,7 +21,7 @@ public:
 	 * @param msg The message to set
 	 * @return A new ParserError object
 	 */
-	explicit ParserError(const std::string& msg) : std::runtime_error(msg), innerException(std::nullopt)
+	explicit ParserError(const std::string& msg) : std::runtime_error(msg), innerException(nullptr)
 	{
 	}
 
@@ -33,10 +33,13 @@ public:
 	 * @return A new ParserError object
 	 */
 	ParserError(const std::string& msg, const std::exception& innerException) :
-		std::runtime_error(msg), innerException(innerException)
+		std::runtime_error(msg), innerException(std::make_exception_ptr(innerException))
 	{
 	}
 
-	const std::optional<const std::exception> innerException;
+	/**
+	 * @brief Contains the original exception if there was a caught exception
+	 */
+	const std::exception_ptr innerException;
 };
 } // BoxNesting

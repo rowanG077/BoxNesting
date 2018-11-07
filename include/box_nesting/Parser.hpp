@@ -12,7 +12,7 @@
 namespace BoxNesting
 {
 /**
- * @brief Parser class that handles reading from input to obtain boxes.
+ * @brief Parser class that handles reading from input to obtain boxes
  */
 class Parser
 {
@@ -23,53 +23,57 @@ public:
 	Parser() = delete;
 
 	/**
-	 * @brief Delete virtual destructor.
+	 * @brief Delete virtual destructor
 	 */
 	virtual ~Parser() = delete;
 
 	/**
-	 * @brief Delete copy constructor.
+	 * @brief Delete copy constructor
 	 * \param b
 	 */
 	Parser(const Parser& b) = delete;
 
 	/**
-	 * @brief Delete move constructor.
+	 * @brief Delete move constructor
 	 * \param b
 	 */
 	Parser(Parser&& b) = delete;
 
 	/**
-	 * @brief Delete copy assignment operator.
+	 * @brief Delete copy assignment operator
 	 * \param b
 	 * \return
 	 */
 	Parser& operator=(const Parser& b) = delete;
 
 	/**
-	 * @brief Delete move assignment operator.
+	 * @brief Delete move assignment operator
 	 * \param b
 	 * \return
 	 */
 	Parser& operator=(Parser&& b) = delete;
 
 	/**
-	 * @brief Get boxes from stdin, if parser fails a ParserException is thrown
-	 *        If specification are not acceptable a std::invalid_argument is thrown.
+	 * @brief Get boxes from stdin.
 	 *
+	 * @throw ParserError Parsing failed due to malformed input
+	 * @throw std::invalid_argument Parsing succeeded but the box specification is not valid
+	 *
+	 * @param inputStream The inputStream to read from
 	 * @return A set of boxes
 	 */
-	static std::vector<Box> getBoxes(std::istream& inputStream);
+	[[nodiscard]] static std::vector<Box> getBoxes(std::istream& inputStream);
 
 private:
 	/**
-	 * @brief Wait for box specification from inputStream and return a box object from it.
-	 * 		  If parser fails a ParserException is thrown. If specification are not acceptable
-	 *        a std::invalid_argument is thrown.
-	 *
+	 * @brief Wait for box specification from inputStream and return a box object from it
+
+	 * @throw ParserError Parsing failed due to malformed input
+	 * @throw std::invalid_argument Parsing succeeded but the box specification is not valid
+	 * 
 	 * @param inputStream The inputStream to read from
 	 * @return Instantiated box object
 	 */
-	static Box parseBoxSpecification(std::istream& inputStream);
+	[[nodiscard]] static Box parseBoxSpecification(std::istream& inputStream);
 };
 } // BoxNesting
