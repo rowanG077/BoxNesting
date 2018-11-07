@@ -89,7 +89,7 @@ public:
 	static constexpr double maxLength = 1.0;
 
 	/**
-	 * @brief Static assert on the assumption any box can only contain a single box nested inside. 
+	 * @brief Static assert on the assumption any box can only contain a single box nested inside.
 	 */
 	static_assert(minLength * 2 >= maxLength,
 		"More then 1 box can be fit inside a larger box."

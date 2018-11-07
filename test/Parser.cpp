@@ -59,8 +59,7 @@ SCENARIO("Parsing box specifcations from inputStream")
 		WHEN("parsing a specification which is not within allowed side length range")
 		{
 			std::stringstream stream;
-			stream << "1" << std::endl
-				   << minLength  << " " << validLength << " " << validLength << std::endl;
+			stream << "1" << std::endl << minLength << " " << validLength << " " << validLength << std::endl;
 
 			THEN("a std::invalid_argument is thrown")
 			{
@@ -71,8 +70,7 @@ SCENARIO("Parsing box specifcations from inputStream")
 		WHEN("parsing a specification which is not of the correct format")
 		{
 			std::stringstream stream;
-			stream << "1" << std::endl
-				   << "foobar " << validLength << " " << validLength << std::endl;
+			stream << "1" << std::endl << "foobar " << validLength << " " << validLength << std::endl;
 
 			THEN("a ParserError is thrown")
 			{

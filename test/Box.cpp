@@ -13,9 +13,12 @@ SCENARIO("Box construction and valid side lengths")
 		{
 			THEN("std::invalid_argument is thrown")
 			{
-				REQUIRE_THROWS_AS(BoxNesting::Box({minLength, minLength + 0.01, minLength + 0.01}), std::invalid_argument);
-				REQUIRE_THROWS_AS(BoxNesting::Box({minLength + 0.01, minLength, minLength + 0.01}), std::invalid_argument);
-				REQUIRE_THROWS_AS(BoxNesting::Box({minLength + 0.01, minLength + 0.01, minLength}), std::invalid_argument);
+				REQUIRE_THROWS_AS(
+					BoxNesting::Box({minLength, minLength + 0.01, minLength + 0.01}), std::invalid_argument);
+				REQUIRE_THROWS_AS(
+					BoxNesting::Box({minLength + 0.01, minLength, minLength + 0.01}), std::invalid_argument);
+				REQUIRE_THROWS_AS(
+					BoxNesting::Box({minLength + 0.01, minLength + 0.01, minLength}), std::invalid_argument);
 				REQUIRE_THROWS_AS(BoxNesting::Box({minLength, minLength, minLength}), std::invalid_argument);
 			}
 		}
@@ -54,9 +57,12 @@ SCENARIO("Box construction and valid side lengths")
 		{
 			THEN("std::invalid_argument is thrown")
 			{
-				REQUIRE_THROWS_AS(BoxNesting::Box({maxLength, maxLength - 0.01, maxLength - 0.01}), std::invalid_argument);
-				REQUIRE_THROWS_AS(BoxNesting::Box({maxLength - 0.01, maxLength, maxLength - 0.01}), std::invalid_argument);
-				REQUIRE_THROWS_AS(BoxNesting::Box({maxLength - 0.01, maxLength - 0.01, maxLength}), std::invalid_argument);
+				REQUIRE_THROWS_AS(
+					BoxNesting::Box({maxLength, maxLength - 0.01, maxLength - 0.01}), std::invalid_argument);
+				REQUIRE_THROWS_AS(
+					BoxNesting::Box({maxLength - 0.01, maxLength, maxLength - 0.01}), std::invalid_argument);
+				REQUIRE_THROWS_AS(
+					BoxNesting::Box({maxLength - 0.01, maxLength - 0.01, maxLength}), std::invalid_argument);
 				REQUIRE_THROWS_AS(BoxNesting::Box({maxLength, maxLength, maxLength}), std::invalid_argument);
 			}
 		}
