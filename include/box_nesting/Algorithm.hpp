@@ -22,10 +22,10 @@ public:
 	 * of visible boxes
 	 *
 	 * @param boxes the set of boxes to be nested
-	 * @return uint32_t the number of visible boxes after running the nesting
+	 * @return uint64_t the number of visible boxes after running the nesting
 	 * algorithm
 	 */
-	uint32_t runAlgorithm(const std::vector<Box>& boxes);
+	uint64_t runAlgorithm(const std::vector<Box>& boxes);
 
 	/**
 	 * @brief function that appends data to an empty graph given a set of boxes.
@@ -35,6 +35,8 @@ public:
 	 * nests inside the box representing vertex b
 	 *
 	 * @param boxes the set of boxes that will be used to create the graph
+	 * 
+	 * @return Graph::Graph<Box> the graph of type BoxNesting::Box
 	 */
 	Graph::Graph<Box> createGraphFromBoxes(const std::vector<Box>& boxes);
 };

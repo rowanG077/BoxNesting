@@ -20,21 +20,21 @@ public:
 	 * @param des the destination vertex of the edge
 	 * @param w the edge weight to be set
 	 */
-	Edge(const Vertex<T>& des, double w);
+	Edge(const Vertex<T>& des, uint64_t w);
 
 	/**
 	 * @brief Get the Destination vertex
 	 *
 	 * @return const Vertex<T>& reference to the destination object
 	 */
-	const Vertex<T>& getDestination() const;
+	[[nodiscard]] const Vertex<T>& getDestination() const;
 
 	/**
 	 * @brief Getter for the weight of the edge
 	 *
 	 * @return double the edge weight
 	 */
-	double getWeight() const;
+	[[nodiscard]] double getWeight() const;
 
 	/**
 	 * @brief Getter for the visited status of the edge
@@ -42,7 +42,7 @@ public:
 	 * @return true if the edge has been visited
 	 * @return false if the edge has not been visited
 	 */
-	bool isVisited() const;
+	[[nodiscard]] bool isVisited() const;
 
 private:
 	/**
@@ -52,7 +52,7 @@ private:
 	/**
 	 * @brief the edge weight
 	 */
-	double weight;
+	uint64_t weight;
 	/**
 	 * @brief true if the edge has been visited
 	 */

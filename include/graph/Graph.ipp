@@ -8,17 +8,21 @@ void Graph<T>::addVertex(const T& info)
 {
 	Vertex<T> vertex(idCounter, info);
 	vertices.push_back(vertex);
-	idCounter ++;
+	++ idCounter;
 }
 
 template <class T>
-void Graph<T>::addEdge(Vertex<T>& source, const Vertex<T>& destination, double weight)
+void Graph<T>::addEdge(const Vertex<T>& source, const Vertex<T>& destination, uint64_t weight)
 {
-	source.addEdge(destination, weight);
+	for (auto& vertex: vertices) {
+		if (source == vertex) {
+			vertex.addEdge(destination, weight);
+		}
+	}
 }
 
 template <class T>
-std::vector<Vertex<T>>& Graph<T>::getVertices()
+const std::vector<Vertex<T>>& Graph<T>::getVertices() const
 {
 	return this->vertices;
 }

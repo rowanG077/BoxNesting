@@ -4,7 +4,7 @@ namespace Graph
 {
 
 template <class T>
-Edge<T>::Edge(const Vertex<T>& des, double w):
+Edge<T>::Edge(const Vertex<T>& des, uint64_t w):
     destination(des), weight(w), visited(false)
 {
 }

@@ -7,14 +7,10 @@ SCENARIO("A graph of boxes add edged and check if no vertex has an edge to itsse
 	GIVEN("A basic set of boxes")
 	{
 		Graph::Graph<BoxNesting::Box> graph;
-
-		BoxNesting::Box a({0.6, 0.6, 0.6});
-		BoxNesting::Box b({0.6, 0.6, 0.51});
-		BoxNesting::Box c({0.6, 0.51, 0.6});
-
-		graph.addVertex(a);
-		graph.addVertex(b);
-		graph.addVertex(c);
+		
+		graph.addVertex(BoxNesting::Box ({0.6, 0.6, 0.6}));
+		graph.addVertex(BoxNesting::Box ({0.6, 0.6, 0.51}));
+		graph.addVertex(BoxNesting::Box ({0.6, 0.51, 0.6}));
 
 		WHEN("Checking is edges exist")
 		{

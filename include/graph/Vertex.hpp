@@ -26,10 +26,11 @@ public:
 	/**
 	 * @brief Construct a new Vertex object.
 	 *
-	 * @param info the object of customizable vertex-type T that contains the
-	 * vertex information
+	 * @param newId the unique identifier of the Vertex
+	 * @param con the object of customizable vertex-type T that contains the
+	 * vertex content
 	 */
-	Vertex(uint64_t newId, T info);
+	Vertex(uint64_t newId, T con);
 
 	/**
 	 * @brief comparison operator
@@ -46,21 +47,21 @@ public:
 	 * @param destination reference to the destination vertex
 	 * @param weight the edge weight
 	 */
-	void addEdge(const Vertex<T>& destination, double weight);
+	void addEdge(const Vertex<T>& destination, uint64_t weight);
 
 	/**
-	 * @brief getter for the Vertex-Type T information.
+	 * @brief getter for the Vertex-Type T content.
 	 *
 	 * @return T the information object
 	 */
-	T getInfo() const;
+	[[nodiscard]] const T& getContent() const;
 
 	/**
 	 * @brief Getter for the adjacency list.
 	 *
 	 * @return const std::vector<Edge<T>>& reference to the adjacency list object
 	 */
-	const std::vector<Edge<T>>& getAdjacencyList() const;
+	[[nodiscard]] const std::vector<Edge<T>>& getAdjacencyList() const;
 
 	/**
 	 * @brief function that checks if a vertex has an edge to a specific vertex.
@@ -76,11 +77,11 @@ public:
 	 *
 	 * @return uint64_t the id
 	 */
-	uint64_t getId() const;
+	[[nodiscard]] uint64_t getId() const;
 
 private:
 	uint64_t id;
-	T information;
+	const T content;
 	bool visited;
 	std::vector<Edge<T>> adjacencyList;
 };

@@ -2,7 +2,7 @@ namespace Graph
 {
 
 template <class T>
-Vertex<T>::Vertex(uint64_t newId, T info): id(newId), information(std::move(info)), visited(false)
+Vertex<T>::Vertex(uint64_t newId, T con): id(newId), content(std::move(con)), visited(false)
 {
 }
 
@@ -13,16 +13,16 @@ bool Vertex<T>::operator==(const Vertex<T>& rhs) const
 }
 
 template <class T>
-void Vertex<T>::addEdge(const Vertex<T>& destination, double weight)
+void Vertex<T>::addEdge(const Vertex<T>& destination, uint64_t weight)
 {
     Edge<T> edge(destination, weight);
     adjacencyList.push_back(edge);
 }
 
 template <class T>
-T Vertex<T>::getInfo() const
+const T& Vertex<T>::getContent() const
 {
-    return this->information;
+    return this->content;
 }
 
 template <class T>

@@ -7,13 +7,9 @@ SCENARIO("Running the 'graph creation from a set of boxes' function")
 	{
 		std::vector<BoxNesting::Box> boxes;
 
-		BoxNesting::Box a({0.6, 0.6, 0.6});
-		BoxNesting::Box b({0.7, 0.7, 0.7});
-		BoxNesting::Box c({0.8, 0.8, 0.8});
-
-		boxes.emplace_back(a);
-		boxes.emplace_back(b);
-		boxes.emplace_back(c);
+		boxes.emplace_back(BoxNesting::Box ({0.6, 0.6, 0.6}));
+		boxes.emplace_back(BoxNesting::Box ({0.7, 0.7, 0.7}));
+		boxes.emplace_back(BoxNesting::Box ({0.8, 0.8, 0.8}));
 
 		BoxNesting::Algorithm boxNestingAlgorithm;
 
@@ -27,11 +23,11 @@ SCENARIO("Running the 'graph creation from a set of boxes' function")
 					for (const auto& cVertex : graph.getVertices()) {
 						// An edge means the box is nestable
 						if (graph.isEdgeBetween(vertex, cVertex)) {
-							REQUIRE(vertex.getInfo().isNestable(cVertex.getInfo()) == true);
+							REQUIRE(vertex.getContent().isNestable(cVertex.getContent()) == true);
 						}
 						// No edge means the box is not nestable
 						else {
-							REQUIRE(vertex.getInfo().isNestable(cVertex.getInfo()) == false);
+							REQUIRE(vertex.getContent().isNestable(cVertex.getContent()) == false);
 						}
 					}
 				}
