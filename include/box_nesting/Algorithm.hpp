@@ -35,10 +35,10 @@ public:
 	 * nests inside the box representing vertex b
 	 *
 	 * @param boxes the set of boxes that will be used to create the graph
-	 * 
+	 *
 	 * @return Graph::Graph<Box> the graph of type BoxNesting::Box
 	 */
-	Graph::Graph<Box> createGraphFromBoxes(const std::vector<Box>& boxes);
+	const Graph::Graph<Box> createGraphFromBoxes(const std::vector<Box>& boxes);
 };
 
 } // namespace BoxNesting

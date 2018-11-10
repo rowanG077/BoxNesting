@@ -1,8 +1,6 @@
 #ifndef VERTEX_HPP
 #define VERTEX_HPP
 
-#include <memory>
-#include <utility>
 #include <vector>
 
 /**
@@ -10,8 +8,6 @@
  */
 namespace Graph
 {
-template<class T> class Edge;
-
 /**
  * @brief template class representation of a vertex of type T
  */
@@ -26,11 +22,10 @@ public:
 	/**
 	 * @brief Construct a new Vertex object.
 	 *
-	 * @param newId the unique identifier of the Vertex
 	 * @param con the object of customizable vertex-type T that contains the
 	 * vertex content
 	 */
-	Vertex(uint64_t newId, T con);
+	explicit Vertex(T con);
 
 	/**
 	 * @brief comparison operator
@@ -42,14 +37,6 @@ public:
 	bool operator==(const Vertex<T>& rhs) const;
 
 	/**
-	 * @brief function that adds a directed edge to another vertex.
-	 *
-	 * @param destination reference to the destination vertex
-	 * @param weight the edge weight
-	 */
-	void addEdge(const Vertex<T>& destination, uint64_t weight);
-
-	/**
 	 * @brief getter for the Vertex-Type T content.
 	 *
 	 * @return T the information object
@@ -57,33 +44,34 @@ public:
 	[[nodiscard]] const T& getContent() const;
 
 	/**
-	 * @brief Getter for the adjacency list.
-	 *
-	 * @return const std::vector<Edge<T>>& reference to the adjacency list object
-	 */
-	[[nodiscard]] const std::vector<Edge<T>>& getAdjacencyList() const;
-
-	/**
-	 * @brief function that checks if a vertex has an edge to a specific vertex.
-	 *
-	 * @param destination the destination vertex
-	 * @return true if the vertex has indeed an edge to the destination vertex
-	 * @return false if there is no edge to the destination vertex
-	 */
-	bool hasEdgeTo(const Vertex<T>& destination) const;
-
-	/**
 	 * @brief getter for the id of the vertex
 	 *
-	 * @return uint64_t the id
+	 * @return uint16_t the id
 	 */
-	[[nodiscard]] uint64_t getId() const;
+	[[nodiscard]] uint16_t getId() const;
 
 private:
-	uint64_t id;
+	static uint16_t idCounter;
+	const uint16_t id;
 	const T content;
 	bool visited;
-	std::vector<Edge<T>> adjacencyList;
+};
+
+/**
+ * @brief hash specialization for the Vertex class
+ */
+template<class T> struct VertexHash
+{
+	/**
+	 * @brief function that creates a hash for a vertex
+	 *
+	 * @param v the vertex where the hash will be creates for
+	 * @return size_t the hash
+	 */
+	size_t operator()(const Vertex<T>& v) const
+	{
+		return static_cast<size_t>(v.getId());
+	}
 };
 
 } // namespace Graph

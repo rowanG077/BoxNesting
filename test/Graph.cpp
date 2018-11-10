@@ -7,26 +7,35 @@ SCENARIO("A graph of boxes add edged and check if no vertex has an edge to itsse
 	GIVEN("A basic set of boxes")
 	{
 		Graph::Graph<BoxNesting::Box> graph;
-		
-		graph.addVertex(BoxNesting::Box ({0.6, 0.6, 0.6}));
-		graph.addVertex(BoxNesting::Box ({0.6, 0.6, 0.51}));
-		graph.addVertex(BoxNesting::Box ({0.6, 0.51, 0.6}));
 
-		WHEN("Checking is edges exist")
+		auto a = Graph::Vertex(BoxNesting::Box({0.6, 0.6, 0.61}));
+		auto b = Graph::Vertex(BoxNesting::Box({0.6, 0.6, 0.51}));
+		auto c = Graph::Vertex(BoxNesting::Box({0.6, 0.51, 0.6}));
+
+		graph.addVertex(a);
+		graph.addVertex(b);
+		graph.addVertex(c);
+
+		WHEN("Adding some edges")
 		{
-			graph.addEdge(graph.getVertices()[0], graph.getVertices()[1], 5);
-			graph.addEdge(graph.getVertices()[1], graph.getVertices()[0], 5);
+			graph.addEdge(a, b);
+			graph.addEdge(b, c);
 
 			THEN("Existing edges indeed exist")
 			{
-				REQUIRE(graph.isEdgeBetween(graph.getVertices()[1], graph.getVertices()[0]) == true);
-				REQUIRE(graph.isEdgeBetween(graph.getVertices()[0], graph.getVertices()[1]) == true);
+				REQUIRE(graph.isEdgeBetween(a, b) == true);
+				REQUIRE(graph.isEdgeBetween(b, a) == true);
+				REQUIRE(graph.isEdgeBetween(b, c) == true);
+				REQUIRE(graph.isEdgeBetween(c, b) == true);
+				REQUIRE(graph.isEdgeBetween(a, c) == false);
+				REQUIRE(graph.isEdgeBetween(c, a) == false);
 			}
 
 			THEN("A vertex does not have an edge to itsself")
 			{
-				REQUIRE(graph.isEdgeBetween(graph.getVertices()[0], graph.getVertices()[0]) == false);
-				REQUIRE(graph.isEdgeBetween(graph.getVertices()[1], graph.getVertices()[1]) == false);
+				REQUIRE(graph.isEdgeBetween(a, a) == false);
+				REQUIRE(graph.isEdgeBetween(b, b) == false);
+				REQUIRE(graph.isEdgeBetween(c, c) == false);
 			}
 		}
 	}
