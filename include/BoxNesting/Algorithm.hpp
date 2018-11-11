@@ -1,5 +1,7 @@
-#include <box_nesting/Box.hpp>
-#include <graph/Graph.hpp>
+#pragma once
+
+#include <BoxNesting/Box.hpp>
+#include <Graph/Graph.hpp>
 
 /**
  * @brief Contains code for the boxnesting problem
@@ -25,7 +27,7 @@ public:
 	 * @return uint64_t the number of visible boxes after running the nesting
 	 * algorithm
 	 */
-	[[nodiscard]] uint16_t runAlgorithm(const std::vector<Box>& boxes);
+	[[nodiscard]] uint16_t runAlgorithm(const std::vector<Box>& boxes) const;
 
 	/**
 	 * @brief function that appends data to an empty graph given a set of boxes.
@@ -38,7 +40,20 @@ public:
 	 *
 	 * @return Graph::Graph<Box> the graph of type BoxNesting::Box
 	 */
-	[[nodiscard]] Graph::Graph<Box> createGraphFromBoxes(const std::vector<Box>& boxes);
+	[[nodiscard]] Graph::Graph<Box> createGraphFromBoxes(const std::vector<Box>& boxes) const;
+
+private:
+	/**
+	 * @brief Run the kuhn algorithm
+	 *
+	 * @param graph The total graph
+	 * @param vertex The index of the vertex in the graph its neighbours
+	 * @param used Contains whether a vertex in the left part of the graph was used
+	 * @param pairs Contains which pairs are allready made
+	 * @return Whether pairs could be made
+	 */
+	bool kuhn(
+		const Graph::Graph<Box>& graph, uint16_t vertex, std::vector<bool>& used, std::vector<int32_t>& pairs) const;
 };
 
 } // namespace BoxNesting

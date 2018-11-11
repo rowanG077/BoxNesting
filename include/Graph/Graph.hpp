@@ -1,7 +1,6 @@
-#ifndef GRAPH_HPP
-#define GRAPH_HPP
+#pragma once
 
-#include <graph/Vertex.hpp>
+#include <Graph/Vertex.hpp>
 
 #include <unordered_map>
 #include <unordered_set>
@@ -19,9 +18,14 @@ namespace Graph
 template<class T> struct AdjacencyList
 {
 	/**
-	 * @brief Contains a vertex and the indices of its neighbors
+	 * @brief The vertex for this adjacencyList
 	 */
-	std::pair<Vertex<T>, std::vector<std::uint16_t>> content;
+	Vertex<T> vertex;
+
+	/**
+	 * @brief The vertices the head vertex can travel to via an edge.
+	 */
+	std::vector<std::uint16_t> edges;
 };
 
 /**
@@ -74,6 +78,4 @@ private:
 
 } // namespace Graph
 
-#include <graph/Graph.ipp>
-
-#endif // GRAPH_HPP
+#include <Graph/Graph.ipp>

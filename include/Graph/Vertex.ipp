@@ -12,7 +12,7 @@ Vertex<T>::Vertex(T con): id(++idCounter), content(std::move(con)), visited(fals
 template <class T>
 bool Vertex<T>::operator==(const Vertex<T>& rhs) const
 {
-    return id == rhs.getId();
+    return this->id == rhs.getId();
 }
 
 template <class T>

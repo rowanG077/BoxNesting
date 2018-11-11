@@ -1,6 +1,6 @@
-#include <box_nesting/Box.hpp>
+#include <BoxNesting/Box.hpp>
+#include <Graph/Graph.hpp>
 #include <catch2/catch.hpp>
-#include <graph/Graph.hpp>
 
 SCENARIO("A graph of boxes add edged and check if no vertex has an edge to itsself", "[Graph]")
 {

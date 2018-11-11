@@ -1,5 +1,4 @@
-#ifndef VERTEX_HPP
-#define VERTEX_HPP
+#pragma once
 
 #include <vector>
 
@@ -76,6 +75,4 @@ template<class T> struct VertexHash
 
 } // namespace Graph
 
-#include <graph/Vertex.ipp>
-
-#endif // VERTEX_HPP
+#include <Graph/Vertex.ipp>

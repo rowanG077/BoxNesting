@@ -3,8 +3,8 @@
 #include <istream>
 #include <vector>
 
-#include <box_nesting/Box.hpp>
-#include <box_nesting/ParserError.hpp>
+#include <BoxNesting/Box.hpp>
+#include <BoxNesting/ParserError.hpp>
 
 /**
  * @brief Contains code for the boxnesting problem

@@ -1,6 +1,6 @@
-#include <box_nesting/Algorithm.hpp>
-#include <box_nesting/Parser.hpp>
-#include <box_nesting/version.hpp>
+#include <BoxNesting/Algorithm.hpp>
+#include <BoxNesting/Parser.hpp>
+#include <BoxNesting/version.hpp>
 
 #include <cstdlib>
 #include <iostream>
@@ -8,12 +8,12 @@
 void printVersion()
 {
 	std::cout << "program info:" << std::endl
-			  << "\tname: " << BOX_NESTING_NAME << std::endl
-			  << "\tdescription: " << BOX_NESTING_DESCRIPTION << std::endl
-			  << "\tauthor: " << BOX_NESTING_AUTHOR << std::endl
-			  << "\tversion: " << BOX_NESTING_VERSION << std::endl
-			  << "\tmail: " << BOX_NESTING_MAIL << std::endl
-			  << "\tcopyright: " << BOX_NESTING_COPYRIGHT << std::endl;
+			  << "\tname: " << BOXNESTING_NAME << std::endl
+			  << "\tdescription: " << BOXNESTING_DESCRIPTION << std::endl
+			  << "\tauthor: " << BOXNESTING_AUTHOR << std::endl
+			  << "\tversion: " << BOXNESTING_VERSION << std::endl
+			  << "\tmail: " << BOXNESTING_MAIL << std::endl
+			  << "\tcopyright: " << BOXNESTING_COPYRIGHT << std::endl;
 }
 
 void printHelp(const std::string& progName)

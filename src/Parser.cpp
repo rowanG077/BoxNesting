@@ -1,4 +1,4 @@
-#include <box_nesting/Parser.hpp>
+#include <BoxNesting/Parser.hpp>
 
 #include <climits>
 #include <regex>

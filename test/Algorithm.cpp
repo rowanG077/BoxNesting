@@ -1,4 +1,4 @@
-#include <box_nesting/Algorithm.hpp>
+#include <BoxNesting/Algorithm.hpp>
 #include <catch2/catch.hpp>
 
 #define CATCH_CONFIG_MAIN
@@ -24,8 +24,8 @@ SCENARIO("Running the 'graph creation from a set of boxes' function")
 				for (const auto& list1 : graph.getAdjacencyList()) {
 					for (const auto& list2 : graph.getAdjacencyList()) {
 						// An edge means the box is nestable
-						auto& v1 = list1.content.first;
-						auto& v2 = list2.content.first;
+						auto& v1 = list1.vertex;
+						auto& v2 = list2.vertex;
 						if (graph.isEdgeBetween(v1, v2)) {
 							auto isNestable = v1.getContent().isNestable(v2.getContent())
 								|| v2.getContent().isNestable(v1.getContent());

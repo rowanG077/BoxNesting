@@ -1,4 +1,4 @@
-#include <box_nesting/Parser.hpp>
+#include <BoxNesting/Parser.hpp>
 #include <catch2/catch.hpp>
 
 #include <cstddef>

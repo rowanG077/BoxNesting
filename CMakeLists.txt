@@ -28,7 +28,7 @@ if(${CODE})
 	set(PROJECT_LANGUAGES ${PROJECT_LANGUAGES} C CXX)
 endif()
 
-project(box_nesting
+project(BoxNesting
 	VERSION 1.0.0
 	DESCRIPTION "Algorithms and Datastructures practicum 1 box nesting algorithm"
 	LANGUAGES ${PROJECT_LANGUAGES})
