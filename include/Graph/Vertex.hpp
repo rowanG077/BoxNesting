@@ -53,24 +53,6 @@ private:
 	static uint16_t idCounter;
 	const uint16_t id;
 	const T content;
-	bool visited;
-};
-
-/**
- * @brief hash specialization for the Vertex class
- */
-template<class T> struct VertexHash
-{
-	/**
-	 * @brief function that creates a hash for a vertex
-	 *
-	 * @param v the vertex where the hash will be creates for
-	 * @return size_t the hash
-	 */
-	size_t operator()(const Vertex<T>& v) const
-	{
-		return static_cast<size_t>(v.getId());
-	}
 };
 
 } // namespace Graph

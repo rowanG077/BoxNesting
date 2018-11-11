@@ -50,6 +50,7 @@ private:
 	 * @param vertex The index of the vertex in the graph its neighbours
 	 * @param used Contains whether a vertex in the left part of the graph was used
 	 * @param pairs Contains which pairs are allready made
+	 *
 	 * @return Whether pairs could be made
 	 */
 	bool kuhn(

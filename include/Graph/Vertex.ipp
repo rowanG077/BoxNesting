@@ -5,7 +5,7 @@ template <class T>
 uint16_t Vertex<T>::idCounter = 0;
 
 template <class T>
-Vertex<T>::Vertex(T con): id(++idCounter), content(std::move(con)), visited(false)
+Vertex<T>::Vertex(T con): id(++idCounter), content(std::move(con))
 {
 }
 

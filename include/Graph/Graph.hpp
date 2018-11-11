@@ -2,8 +2,7 @@
 
 #include <Graph/Vertex.hpp>
 
-#include <unordered_map>
-#include <unordered_set>
+#include <vector>
 
 /**
  * @brief Contains generic code that represents a graph and its properties
@@ -68,7 +67,7 @@ public:
 	/**
 	 * @brief Getter for the adjacency list object
 	 *
-	 * @return The e adjacency list by reference
+	 * @return The adjacency list by reference
 	 */
 	const std::vector<AdjacencyList<T>>& getAdjacencyList() const noexcept;
 
