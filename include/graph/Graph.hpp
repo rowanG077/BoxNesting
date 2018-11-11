@@ -12,20 +12,26 @@
 namespace Graph
 {
 /**
+ * @brief Data structure to represent AdjacencyList of the graph
+ *
+ * @tparam T The type of the value to contain in the vertices.
+ */
+template<class T> struct AdjacencyList
+{
+	/**
+	 * @brief Contains a vertex and the indices of its neighbors
+	 */
+	std::pair<Vertex<T>, std::vector<std::uint16_t>> content;
+};
+
+/**
  * @brief template class representing a graph
+ *
+ * @tparam T The type of the value to contain in the vertices.
  */
 template<class T> class Graph
 {
 public:
-	/**
-	 * @brief each vertex in the adjacency list has a list of references that form the edges
-	 */
-	using Edges = std::unordered_set<Vertex<T>, VertexHash<T>>;
-	/**
-	 * @brief datatype for the adjacency list of the graph
-	 */
-	using VertexMap = std::unordered_map<Vertex<T>, Edges, VertexHash<T>>;
-
 	/**
 	 * @brief function that adds a vertex to the graph
 	 *
@@ -36,6 +42,8 @@ public:
 	/**
 	 * @brief function that adds an edge to the graph
 	 *
+	 * @throw std::logic_error If v1 or v2 are vertices that are not in the graph.
+	 *
 	 * @param v1 source of the edge
 	 * @param v2 destination of the edge
 	 */
@@ -44,22 +52,24 @@ public:
 	/**
 	 * @brief function that checks if there is an edge between two vertices.
 	 *
-	 * @param source the source vertex of the edge
-	 * @param destination the destination vertex of the edge
+	 * @throw std::logic_error If v1 or v2 are vertices that are not in the graph.
+	 *
+	 * @param v1 the source vertex of the edge
+	 * @param v2 the destination vertex of the edge
 	 * @return true if there is an edge
 	 * @return false if there is no edge
 	 */
-	bool isEdgeBetween(const Vertex<T>& source, const Vertex<T>& destination) const;
+	bool isEdgeBetween(const Vertex<T>& v1, const Vertex<T>& v2) const;
 
 	/**
 	 * @brief Getter for the adjacency list object
 	 *
-	 * @return const VertexMap& the adjacency list by reference
+	 * @return The e adjacency list by reference
 	 */
-	const VertexMap& getAdjacencyList() const;
+	const std::vector<AdjacencyList<T>>& getAdjacencyList() const noexcept;
 
 private:
-	VertexMap adjacencyList;
+	std::vector<AdjacencyList<T>> adjacencyList;
 };
 
 } // namespace Graph

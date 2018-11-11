@@ -12,9 +12,15 @@ std::vector<Box> Parser::getBoxes(std::istream& inputStream)
 	std::string inputLine;
 	std::getline(inputStream, inputLine);
 
-	std::uint64_t boxCount = 0;
+	uint16_t boxCount = 0;
 	try {
-		boxCount = std::stoul(inputLine);
+		auto tmp = std::stoi(inputLine);
+		if (tmp <= 0) {
+			std::stringstream ss;
+			ss << "Amount of boxes is smaller then 1. Got: \"" << tmp << "\"";
+			throw ParserError(ss.str());
+		}
+		boxCount = static_cast<uint16_t>(tmp);
 	} catch (const std::invalid_argument& e) {
 		std::stringstream ss;
 		ss << "Expected number to indicate amount of boxes to take from input. Got: \"" << inputLine << "\"";
@@ -43,7 +49,7 @@ Box Parser::parseBoxSpecification(std::istream& inputStream)
 
 	if (!std::regex_match(inputLine, match, boxRegex)) {
 		std::stringstream ss;
-		ss << R"(Expected a box specification in the form of "0.5 0.6 0.6". Got:: ")" << inputLine << "\"";
+		ss << R"(Expected a box specification in the form of "x.x y.y z.z". Got: ")" << inputLine << "\"";
 		throw ParserError(ss.str());
 	}
 

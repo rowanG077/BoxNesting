@@ -1,6 +1,6 @@
 #include <box_nesting/Algorithm.hpp>
 #include <catch2/catch.hpp>
-#include <iostream>
+
 #define CATCH_CONFIG_MAIN
 
 SCENARIO("Running the 'graph creation from a set of boxes' function")
@@ -21,19 +21,16 @@ SCENARIO("Running the 'graph creation from a set of boxes' function")
 
 			THEN("There can only be edges from vertex a to b if a nests inside b")
 			{
-				for (const auto& vertex : graph.getAdjacencyList()) {
-					for (const auto& cVertex : graph.getAdjacencyList()) {
+				for (const auto& list1 : graph.getAdjacencyList()) {
+					for (const auto& list2 : graph.getAdjacencyList()) {
 						// An edge means the box is nestable
-						if (graph.isEdgeBetween(vertex.first, cVertex.first)) {
-							REQUIRE((vertex.first.getContent().isNestable(cVertex.first.getContent())
-										|| cVertex.first.getContent().isNestable(vertex.first.getContent()))
-								== true);
-						}
-						// No edge means the box is not nestable
-						else {
-							REQUIRE((vertex.first.getContent().isNestable(cVertex.first.getContent())
-										&& cVertex.first.getContent().isNestable(vertex.first.getContent()))
-								== false);
+						auto& v1 = list1.content.first;
+						auto& v2 = list2.content.first;
+						if (graph.isEdgeBetween(v1, v2)) {
+							auto isNestable = v1.getContent().isNestable(v2.getContent())
+								|| v2.getContent().isNestable(v1.getContent());
+
+							REQUIRE(isNestable);
 						}
 					}
 				}

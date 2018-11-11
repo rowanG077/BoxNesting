@@ -7,7 +7,7 @@
  */
 namespace BoxNesting
 {
-uint64_t Algorithm::runAlgorithm(const std::vector<Box>& boxes)
+uint16_t Algorithm::runAlgorithm(const std::vector<Box>& boxes)
 {
 	const auto graph = createGraphFromBoxes(boxes);
 
@@ -16,7 +16,7 @@ uint64_t Algorithm::runAlgorithm(const std::vector<Box>& boxes)
 	return 0;
 }
 
-const Graph::Graph<Box> Algorithm::createGraphFromBoxes(const std::vector<Box>& boxes)
+Graph::Graph<Box> Algorithm::createGraphFromBoxes(const std::vector<Box>& boxes)
 {
 	Graph::Graph<Box> graph;
 
@@ -28,16 +28,25 @@ const Graph::Graph<Box> Algorithm::createGraphFromBoxes(const std::vector<Box>& 
 	std::transform(boxes.begin(), boxes.end(), std::back_inserter(rightVertices),
 		[](const auto& b) { return Graph::Vertex<Box>(b); });
 
-	// // Add a directed edge from each box-vertex that nests inside another box-vertex
+	// Add two distinct vertices to the graph for each box
+	for (const auto& v : leftVertices) {
+		graph.addVertex(v);
+	}
+
+	for (const auto& v : rightVertices) {
+		graph.addVertex(v);
+	}
+
+	// Create edges between left and right vertices if the left box can nest in
+	// the right box
 	for (const auto& v1 : leftVertices) {
-		graph.addVertex(v1);
 		for (const auto& v2 : rightVertices) {
-			graph.addVertex(v2);
 			if (v1.getContent().isNestable(v2.getContent())) {
 				graph.addEdge(v1, v2);
 			}
 		}
 	}
+
 	return graph;
 }
 

@@ -25,7 +25,7 @@ public:
 	 * @return uint64_t the number of visible boxes after running the nesting
 	 * algorithm
 	 */
-	uint64_t runAlgorithm(const std::vector<Box>& boxes);
+	[[nodiscard]] uint16_t runAlgorithm(const std::vector<Box>& boxes);
 
 	/**
 	 * @brief function that appends data to an empty graph given a set of boxes.
@@ -38,7 +38,7 @@ public:
 	 *
 	 * @return Graph::Graph<Box> the graph of type BoxNesting::Box
 	 */
-	const Graph::Graph<Box> createGraphFromBoxes(const std::vector<Box>& boxes);
+	[[nodiscard]] Graph::Graph<Box> createGraphFromBoxes(const std::vector<Box>& boxes);
 };
 
 } // namespace BoxNesting
