@@ -12,16 +12,17 @@ uint16_t Algorithm::runAlgorithm(const std::vector<Box>& boxes) const
 {
 	this->graph = createGraphFromBoxes(boxes);
 
-	// n is the amount of vertices in the left part and the right part
-	// of the bipartite graph. and k the amount of vertices in the right part
-	// of the graph. They are the same in our box case but could be different
+	// n is the amount of vertices in the left part of the bipartite graph
+	// k the amount of vertices in the right part of the bipartite graph
+	// They are the same in our boxes case but could be different
 	// in other cases
 
 	// since we know graph size doesn't exceed uint16_t we can cast here safely
 	auto n = static_cast<uint16_t>(graph.getLeftVertices().size());
 	auto k = static_cast<uint16_t>(graph.getRightVertices().size());
 
-	this->pairs = std::vector<int32_t>(n, -1);
+	// We use 0 for no pair and the index of the vertex + 1 for found pair
+	this->pairs = std::vector<uint16_t>(n, 0);
 	this->used = std::vector<bool>(k, false);
 
 	// iterate through vertices of the left side
@@ -31,7 +32,16 @@ uint16_t Algorithm::runAlgorithm(const std::vector<Box>& boxes) const
 		kuhn(i);
 	}
 
-	return 0;
+	uint16_t matches = 0;
+	for (uint16_t i = 0; i < k; ++i) {
+		if (pairs[i] != 0) {
+			++matches;
+		}
+	}
+
+	// amount of visible boxes is the total amount of boxes
+	// minus the matches. Since a match means a box can nest inside another box
+	return static_cast<uint16_t>(boxes.size() - matches);
 }
 
 bool Algorithm::kuhn(uint16_t vertex) const
@@ -40,9 +50,19 @@ bool Algorithm::kuhn(uint16_t vertex) const
 		return false;
 	}
 	this->used[vertex] = true;
-	this->pairs[vertex] = static_cast<int32_t>(graph.getLeftVertices().size());
 
-	return true;
+	auto sz = this->graph.getRightVertices().size();
+	for (uint16_t i = 0; i < sz; ++i) {
+		if (!this->graph.isEdgeBetween(vertex, i)) {
+			continue;
+		}
+		// Correct for the NILL value by removing/adding one to convert to vertex index
+		if (pairs[i] == 0 || kuhn(static_cast<uint16_t>(pairs[i] - 1))) {
+			pairs[i] = static_cast<uint16_t>(vertex + 1);
+			return true;
+		}
+	}
+	return false;
 }
 
 Graph::BipartiteGraph<Box> Algorithm::createGraphFromBoxes(const std::vector<Box>& boxes) const

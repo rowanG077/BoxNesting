@@ -16,13 +16,12 @@ namespace Graph
 template<class T> class AdjacencyMatrix
 {
 public:
-    /**
-     * @brief Construct a new empty AdjacencyMatrix object
-     */
-    AdjacencyMatrix() : data(0)
-    {
-
-    }
+	/**
+	 * @brief Construct a new empty AdjacencyMatrix object
+	 */
+	AdjacencyMatrix() : data(0)
+	{
+	}
 
 	/**
 	 * @brief Construct a new AdjacencyMatrix object
@@ -32,7 +31,6 @@ public:
 	 */
 	AdjacencyMatrix(size_t l, size_t r) : data(l * r), leftCount(l), rightCount(r)
     {
-
     }
 
     /**
@@ -60,11 +58,9 @@ public:
 	 *
 	 * @return Const value at that index
 	 */
-	[[nodiscard]] const T& at(size_t l, size_t r) const {
-        return this->data.at(l * this->rightCount + r);
-    }
+	[[nodiscard]] const T& at(size_t l, size_t r) const { return this->data.at(l * this->rightCount + r); }
 
-private:
+	private:
     /**
      * @brief Contains the data of the adjacencyMatrix
      */

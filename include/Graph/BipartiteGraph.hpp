@@ -19,7 +19,7 @@ template<class T> class BipartiteGraph
 {
 public:
 	/**
-	 * @brief Construct a new empty bipartite graph  
+	 * @brief Construct a new empty bipartite graph
 	 */
 	BipartiteGraph() = default;
 

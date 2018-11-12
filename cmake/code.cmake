@@ -20,6 +20,19 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
 	endif()
 endif()
 
+# set optimization flags for release
+if(CMAKE_BUILD_TYPE STREQUAL "Release")
+	if(CMAKE_C_COMPILER_ID STREQUAL "Clang" OR
+		CMAKE_C_COMPILER_ID STREQUAL "GNU")
+		add_compile_options(-O3)
+		if(${WERROR})
+			add_compile_options(-Werror)
+		endif()
+	else()
+		message(WARNING "Optimization not supported for current compiler.")
+	endif()
+endif()
+
 include_directories(BEFORE include)
 
 if(${COVERAGE})
