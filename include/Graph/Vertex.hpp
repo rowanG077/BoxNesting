@@ -50,8 +50,20 @@ public:
 	[[nodiscard]] uint16_t getId() const;
 
 private:
+	/**
+	 * @brief Static counter that is used to create new id
+	 *        everytime a new vertex is constructed  
+	 */
 	static uint16_t idCounter;
+
+	/**
+	 * @brief The id of the vertex
+	 */
 	const uint16_t id;
+
+	/**
+	 * @brief The content of the vertex  
+	 */
 	const T content;
 };
 

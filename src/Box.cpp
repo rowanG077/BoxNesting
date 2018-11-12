@@ -7,6 +7,9 @@ namespace BoxNesting
 {
 Box::Box(const std::array<float, 3>& sideLengths) : sideLengths(sideLengths)
 {
+	// Sice we only care whether a box can nest inside another box
+	// We can optimize this check by always just sorting the lengths
+	// so we don't have to check the permutations of the sidelengths
 	std::sort(this->sideLengths.begin(), this->sideLengths.end());
 
 	for (auto l : this->sideLengths) {

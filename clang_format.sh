@@ -12,7 +12,7 @@ EINTERNAL=2
 EINVAL=3
 
 # variables
-PATTERN_DEFAULT='{src,include,test}/**/*.{c,h,cpp,hpp}'
+PATTERN_DEFAULT='{src,include,test}/**/*.{c,h,cpp,hpp,ipp}'
 declare -a PATTERNS
 unset ACTION
 unset CLANG_FORMAT_PATH

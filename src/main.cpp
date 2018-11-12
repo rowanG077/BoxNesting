@@ -54,7 +54,7 @@ void printHelp(const std::string& progName)
 }
 
 int main(int argc, char** argv)
-{
+{	
 	// Because ptr arithmatic is not allowed but we need it here
 	// to access program arguments we exclude no lint here
 	std::vector<std::string> arguments(argv, argv + argc); // NOLINT

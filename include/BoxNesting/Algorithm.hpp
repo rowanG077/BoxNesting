@@ -43,8 +43,8 @@ private:
 	 * @brief Run the kuhn algorithm. It's based on the DFS and will try to find
 	 *        chains of maximum length.
 	 *
-	 * @param vertex The index of the vertex in the left part of the 
-	 *               Bipartite graph to start running the algorithm from 
+	 * @param vertex The index of the vertex in the left part of the
+	 *               Bipartite graph to start running the algorithm from
 	 *
 	 * @return Whether a chain could be made
 	 */

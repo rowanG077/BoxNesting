@@ -39,8 +39,10 @@ SCENARIO("Running the 'graph creation from a set of boxes' function")
 
 	GIVEN("A set of boxes where every box except for one can nest inside another")
 	{
-		std::vector<BoxNesting::Box> boxes{BoxNesting::Box({0.9f, 0.9f, 0.9f}), BoxNesting::Box({0.8f, 0.8f, 0.8f}),
-			BoxNesting::Box({0.7f, 0.7f, 0.7f}), BoxNesting::Box({0.6f, 0.6f, 0.6f})};
+		std::vector<BoxNesting::Box> boxes{BoxNesting::Box({0.9f, 0.9f, 0.9f}),
+			BoxNesting::Box({0.8f, 0.8f, 0.8f}),
+			BoxNesting::Box({0.7f, 0.7f, 0.7f}),
+			BoxNesting::Box({0.6f, 0.6f, 0.6f})};
 
 		THEN("Only one visible box remains after nesting")
 		{
@@ -51,7 +53,8 @@ SCENARIO("Running the 'graph creation from a set of boxes' function")
 
 	GIVEN("A set of boxes where only one box can nest inside another")
 	{
-		std::vector<BoxNesting::Box> boxes1{BoxNesting::Box({0.6f, 0.6f, 0.6f}), BoxNesting::Box({0.75f, 0.75f, 0.75f}),
+		std::vector<BoxNesting::Box> boxes1{BoxNesting::Box({0.6f, 0.6f, 0.6f}),
+			BoxNesting::Box({0.75f, 0.75f, 0.75f}),
 			BoxNesting::Box({0.9f, 0.7f, 0.7f})};
 
 		std::vector<BoxNesting::Box> boxes2{BoxNesting::Box({0.75f, 0.75f, 0.75f}),

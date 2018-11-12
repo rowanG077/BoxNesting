@@ -66,6 +66,7 @@ public:
 	 * @return The left vertices of the bipartite graph
 	 */
 	[[nodiscard]] const std::vector<Vertex<T>>& getLeftVertices() const noexcept;
+
 	/**
 	 * @brief Get the rigt Vertices of the bipartite graph
 	 *
@@ -86,7 +87,7 @@ private:
 
 	/**
 	 * @brief Contains the edges between the left and right vertices
-	 * 		  The vector specialization of bool is broken so we use uint8_t instead of bool
+	 *        The vector specialization of bool is broken so we use uint8_t instead of bool
 	 */
 	AdjacencyMatrix<uint8_t> adjacencyMatrix;
 };

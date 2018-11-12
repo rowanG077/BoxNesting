@@ -9,9 +9,9 @@
 namespace Graph
 {
 /**
- * @brief Class that can be used to store a 2d array continously in memory
+ * @brief Class that can be used to store an AdjacencyMatrix continously in memory
  *
- * @tparam T The type to store in the array
+ * @tparam T The type to store in the matrix
  */
 template<class T> class AdjacencyMatrix
 {
@@ -30,20 +30,21 @@ public:
 	 * @param r The amount of right vertices
 	 */
 	AdjacencyMatrix(size_t l, size_t r) : data(l * r), leftCount(l), rightCount(r)
-    {
-    }
+	{
 
-    /**
-     * @brief Get element at specified indices
-     *
-     * @param l The left vertex index
-     * @param r The right vertex index
-     *
-     * @throws std::out_of_range if index is out of range
-     *
-     * @return Value at that index
-     */
-    [[nodiscard]] T& at(size_t l, size_t r)
+	}
+
+	/**
+	 * @brief Get element at specified indices
+	 *
+	 * @param l The left vertex index
+	 * @param r The right vertex index
+	 *
+	 * @throws std::out_of_range if index is out of range
+	 *
+	 * @return Value at that index
+	*/
+	[[nodiscard]] T& at(size_t l, size_t r)
 	{
 		return this->data.at(l * this->rightCount + r);
 	}
@@ -60,11 +61,11 @@ public:
 	 */
 	[[nodiscard]] const T& at(size_t l, size_t r) const { return this->data.at(l * this->rightCount + r); }
 
-	private:
-    /**
-     * @brief Contains the data of the adjacencyMatrix
-     */
-    std::vector<T> data;
+private:
+	/**
+	 * @brief Contains the data of the adjacencyMatrix
+	 */
+	std::vector<T> data;
 
 	/**
 	 * @brief Contains the amount of left vertices
