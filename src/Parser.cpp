@@ -53,17 +53,17 @@ Box Parser::parseBoxSpecification(std::istream& inputStream)
 		throw ParserError(ss.str());
 	}
 
-	double x = 0;
-	double y = 0;
-	double z = 0;
+	float x = 0;
+	float y = 0;
+	float z = 0;
 
 	try {
-		x = std::stod(match[1].str());
-		y = std::stod(match[2].str());
-		z = std::stod(match[3].str());
+		x = std::stof(match[1].str());
+		y = std::stof(match[2].str());
+		z = std::stof(match[3].str());
 	} catch (const std::out_of_range& e) {
 		std::stringstream ss;
-		ss << "x, y or z length of box is out of range of doubles range, got x: " << match[1].str()
+		ss << "x, y or z length of box is out of range of floats range, got x: " << match[1].str()
 		   << ", y: " << match[2].str() << ", z: " << match[3].str();
 		throw ParserError(ss.str(), e);
 	}

@@ -9,9 +9,9 @@ SCENARIO("Running the 'graph creation from a set of boxes' function")
 	{
 		std::vector<BoxNesting::Box> boxes;
 
-		boxes.emplace_back(BoxNesting::Box({0.6, 0.6, 0.6}));
-		boxes.emplace_back(BoxNesting::Box({0.7, 0.7, 0.7}));
-		boxes.emplace_back(BoxNesting::Box({0.8, 0.8, 0.8}));
+		boxes.emplace_back(BoxNesting::Box({0.6f, 0.6f, 0.6f}));
+		boxes.emplace_back(BoxNesting::Box({0.7f, 0.7f, 0.7f}));
+		boxes.emplace_back(BoxNesting::Box({0.8f, 0.8f, 0.8f}));
 
 		BoxNesting::Algorithm boxNestingAlgorithm;
 

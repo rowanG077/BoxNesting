@@ -30,10 +30,10 @@ SCENARIO("Parsing box specifcations from inputStream")
 				REQUIRE(boxes.size() == 5);
 				for (std::size_t i = 0; i < boxes.size(); ++i) {
 					const auto& l = boxes.at(i).getSideLengths();
-					auto offset = static_cast<double>(i) * 0.03;
-					REQUIRE(l.at(0) == Approx(minLength + offset + 0.01));
-					REQUIRE(l.at(1) == Approx(minLength + offset + 0.02));
-					REQUIRE(l.at(2) == Approx(minLength + offset + 0.03));
+					auto offset = static_cast<float>(i) * 0.03f;
+					REQUIRE(l.at(0) == Approx(minLength + offset + 0.01f));
+					REQUIRE(l.at(1) == Approx(minLength + offset + 0.02f));
+					REQUIRE(l.at(2) == Approx(minLength + offset + 0.03f));
 				}
 			}
 		}
@@ -48,10 +48,10 @@ SCENARIO("Parsing box specifcations from inputStream")
 			}
 		}
 
-		WHEN("parsing the first line and a very very large number is present")
+		WHEN("parsing the first line and a large number is present")
 		{
 			std::stringstream stream;
-			stream << "9" << std::numeric_limits<std::uint64_t>::max() << std::endl;
+			stream << "9" << std::numeric_limits<std::uint16_t>::max() << std::endl;
 			THEN("a ParserError is thrown")
 			{
 				REQUIRE_THROWS_AS(BoxNesting::Parser::getBoxes(stream), BoxNesting::ParserError);
@@ -68,11 +68,11 @@ SCENARIO("Parsing box specifcations from inputStream")
 			}
 		}
 
-		WHEN("parsing a specification which is outside of the range of a double")
+		WHEN("parsing a specification which is outside of the range of a float")
 		{
 			std::stringstream stream;
 			stream << "1" << std::endl
-				   << std::fixed << "9" << std::numeric_limits<double>::max() << " " << validLength << " "
+				   << std::fixed << "9" << std::numeric_limits<float>::max() << " " << validLength << " "
 				   << validLength << std::endl;
 
 			THEN("a ParserError is thrown")

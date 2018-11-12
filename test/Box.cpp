@@ -14,11 +14,11 @@ SCENARIO("Box construction and valid side lengths")
 			THEN("std::invalid_argument is thrown")
 			{
 				REQUIRE_THROWS_AS(
-					BoxNesting::Box({minLength, minLength + 0.01, minLength + 0.01}), std::invalid_argument);
+					BoxNesting::Box({minLength, minLength + 0.01f, minLength + 0.01f}), std::invalid_argument);
 				REQUIRE_THROWS_AS(
-					BoxNesting::Box({minLength + 0.01, minLength, minLength + 0.01}), std::invalid_argument);
+					BoxNesting::Box({minLength + 0.01f, minLength, minLength + 0.01f}), std::invalid_argument);
 				REQUIRE_THROWS_AS(
-					BoxNesting::Box({minLength + 0.01, minLength + 0.01, minLength}), std::invalid_argument);
+					BoxNesting::Box({minLength + 0.01f, minLength + 0.01f, minLength}), std::invalid_argument);
 				REQUIRE_THROWS_AS(BoxNesting::Box({minLength, minLength, minLength}), std::invalid_argument);
 			}
 		}
@@ -27,18 +27,18 @@ SCENARIO("Box construction and valid side lengths")
 		{
 			THEN("box is constructed")
 			{
-				REQUIRE_NOTHROW(BoxNesting::Box({maxLength - 0.01, maxLength - 0.01, maxLength - 0.01}));
+				REQUIRE_NOTHROW(BoxNesting::Box({maxLength - 0.01f, maxLength - 0.01f, maxLength - 0.01f}));
 				REQUIRE_NOTHROW(BoxNesting::Box({validLength, validLength, validLength}));
-				REQUIRE_NOTHROW(BoxNesting::Box({validLength, validLength, minLength + 0.01}));
-				REQUIRE_NOTHROW(BoxNesting::Box({validLength, minLength + 0.01, validLength}));
-				REQUIRE_NOTHROW(BoxNesting::Box({minLength + 0.01, minLength + 0.01, minLength + 0.01}));
+				REQUIRE_NOTHROW(BoxNesting::Box({validLength, validLength, minLength + 0.01f}));
+				REQUIRE_NOTHROW(BoxNesting::Box({validLength, minLength + 0.01f, validLength}));
+				REQUIRE_NOTHROW(BoxNesting::Box({minLength + 0.01f, minLength + 0.01f, minLength + 0.01f}));
 			}
 
 			THEN("box lengths are ordered from small to large")
 			{
-				const auto l1 = minLength + 0.01;
-				const auto l2 = minLength + 0.02;
-				const auto l3 = minLength + 0.03;
+				const auto l1 = minLength + 0.01f;
+				const auto l2 = minLength + 0.02f;
+				const auto l3 = minLength + 0.03f;
 
 				const BoxNesting::Box a({l1, l2, l3});
 				const BoxNesting::Box b({l2, l3, l1});
@@ -58,11 +58,11 @@ SCENARIO("Box construction and valid side lengths")
 			THEN("std::invalid_argument is thrown")
 			{
 				REQUIRE_THROWS_AS(
-					BoxNesting::Box({maxLength, maxLength - 0.01, maxLength - 0.01}), std::invalid_argument);
+					BoxNesting::Box({maxLength, maxLength - 0.01f, maxLength - 0.01f}), std::invalid_argument);
 				REQUIRE_THROWS_AS(
-					BoxNesting::Box({maxLength - 0.01, maxLength, maxLength - 0.01}), std::invalid_argument);
+					BoxNesting::Box({maxLength - 0.01f, maxLength, maxLength - 0.01f}), std::invalid_argument);
 				REQUIRE_THROWS_AS(
-					BoxNesting::Box({maxLength - 0.01, maxLength - 0.01, maxLength}), std::invalid_argument);
+					BoxNesting::Box({maxLength - 0.01f, maxLength - 0.01f, maxLength}), std::invalid_argument);
 				REQUIRE_THROWS_AS(BoxNesting::Box({maxLength, maxLength, maxLength}), std::invalid_argument);
 			}
 		}
@@ -78,11 +78,11 @@ SCENARIO("Boxes can nest inside another if their dimensions allow it", "[Box]")
 	GIVEN("a set of boxes")
 	{
 		BoxNesting::Box a({validLength, validLength, validLength});
-		BoxNesting::Box b({validLength, validLength, minLength + 0.01});
-		BoxNesting::Box c({validLength, minLength + 0.01, validLength});
-		BoxNesting::Box d({validLength - 0.01, validLength, validLength});
-		BoxNesting::Box e({validLength - 0.01, validLength - 0.01, validLength - 0.01});
-		BoxNesting::Box f({minLength + 0.01, minLength + 0.01, minLength + 0.01});
+		BoxNesting::Box b({validLength, validLength, minLength + 0.01f});
+		BoxNesting::Box c({validLength, minLength + 0.01f, validLength});
+		BoxNesting::Box d({validLength - 0.01f, validLength, validLength});
+		BoxNesting::Box e({validLength - 0.01f, validLength - 0.01f, validLength - 0.01f});
+		BoxNesting::Box f({minLength + 0.01f, minLength + 0.01f, minLength + 0.01f});
 
 		THEN("they can nest inside eachother if their dimensions allow it")
 		{

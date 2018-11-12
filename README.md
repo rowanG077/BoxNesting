@@ -4,10 +4,10 @@ Given a set of boxes where each box has a height, length and depth between 0.5m 
 
 # Usage
 ```
-usage: box_nesting [options]
+usage: BoxNesting [options]
   basic user options:
-    -h --help   show this message
-    -v --version        show version
+    -h --help     show this message
+    -v --version  show version
 
 when no options are specified program waits for input of boxes on stdin in the following format:
 
@@ -51,7 +51,7 @@ Now the executable will be available in `build/src/BoxNesting`
 ## Test
 The project uses the catch2 testing framework. The build is tested with version 2.4.2 but it should work with any version >= 2.0.0
 
-To enable testing the `-DTEST:BOOL=ON` has to be passed to cmake. Subsequentally the `test` target is available on the resulting make file and the test executable will be build when building the code.
+To enable testing the `-DTEST:BOOL=ON` has to be passed to cmake. Subsequentally the `test` target is available on the resulting make file and the test executable will be build when building the code. Running `make test` will run all test cases and print the results.
 
 Example usage:
 
@@ -88,14 +88,66 @@ Example usage:
 ## Flawfinder
 Flawfinder is a static checked which is also used to ensure a higher code quality, tested with version 2.0.7. There is a specific target for this checked since it's not ran while building the code.
 
+Example usage:
+
 ```
 > mkdir build && cd build
 > cmake ../ -DFLAWFINDER=ON
-> make
+> make flawfinder
 ```
 
 ## Sanitizer
- 
+When using gcc there is support for running the undefined behaviour sanitizer(ubsan) and the adress sanitizer(asan) which can detect certain issues with the program at runtime. To enable the sanitizers to be included in the code the `-DSANITISE:BOOL=ON` flag can be passed to cmake. Then the resulting executables(code and test) will be instrumented with the sanitizers. Please note that enabling these sanitizers can NOT be enabled at the same time as code coverage instrumentation since they are not compatible with eachother.
+
+Example usage:
+
+```
+> mkdir build && cd build
+> cmake ../ -DSANITISE:BOOL=ON
+> make
+```
+
 ## Code coverage
+When using gcc there is support for instrumenting the code with coverage counters and generating a html report(dependency on gcov >= 7.3 and lcov >= 1.13 other version might work or they might not). This will allow you to get insight on what lines are hit in your code and how many times. Note that these flags cannot be enabled at the same time as the Sanitizer flags since they are incompatible. To enable the code coverage counters the `-DSANITISE:BOOL=ON` flag can be passed to cmake. Now when running the program or the tests coverage counter files will be generated. These can be converted to a html page by running `make coverage_report`. Since multiple runs of the code can poison the counters to no longer make much sense another target is available `make coverage_reset` which will reset the counters.
+
+Example usage:
+
+```
+> mkdir build && cd build
+> cmake ../ -DCOVERAGE:BOOL=ON -DTEST:BOOL=ON
+> make
+> make test
+> make coverage_report
+> make coverage_reset
+```
 
 ## Doxygen
+Doxygen documentation html pages can be build by passing `-DDOXYGEN:BOOL=ON` to cmake and then building it with `make doxygen`. This has a dependency on doxygen >= 1.8.13 and graphviz >= 2.40. Other version might work but they might not.
+
+```
+> mkdir build && cd build
+> cmake ../ -DDOXYGEN:BOOL=ON
+> make doxygen
+```
+
+## Warnings as errors
+By default any target will not fail if it somehow emits warnings. If `-DWERROR:BOOL=ON` is passed to cmake any warnings will turn into errors and building will be stopped when any error is encountered.
+
+Example usage:
+
+```
+> mkdir build && cd build
+> cmake ../ -DWERROR:BOOL=ON
+> make
+```
+
+## Release and debug builds
+By default a release build is made. To make an unoptimized debug build pass `-DCMAKE_BUILD_TYPE:STRING=Debug` to cmake.
+
+Example usage:
+
+```
+> mkdir build && cd build
+> cmake ../ -DCMAKE_BUILD_TYPE:STRING=Debug
+> make
+```

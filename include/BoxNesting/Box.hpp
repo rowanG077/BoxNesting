@@ -56,7 +56,7 @@ public:
 	 * @param sideLengths The length of the sides of the box in each dimensions
 	 * @return A new Box object
 	 */
-	explicit Box(const std::array<double, 3>& sideLengths);
+	explicit Box(const std::array<float, 3>& sideLengths);
 
 	/**
 	 * @brief Check if this box can nest inside other box
@@ -71,19 +71,21 @@ public:
 	 *
 	 * @return array containing the side lengths ordered from smallest to largest
 	 */
-	[[nodiscard]] const std::array<double, 3>& getSideLengths() const { return this->sideLengths; }
+	[[nodiscard]] const std::array<float, 3>& getSideLengths() const {
+		return this->sideLengths;
+	}
 
 	/**
 	 * @brief The minimum length that a side of a box may have
 	 * 		  Is non-inclusive so the length x > minLength
 	 */
-	static constexpr double minLength = 0.5;
+	static constexpr float minLength = 0.5;
 
 	/**
 	 * @brief The maximum length that a side of a box may have
 	 * 		  Is non-inclusive so the length x < maxLength
 	 */
-	static constexpr double maxLength = 1.0;
+	static constexpr float maxLength = 1.0;
 
 	/**
 	 * @brief Static assert on the assumption any box can only contain a single box nested inside
@@ -96,6 +98,6 @@ private:
 	/**
 	 * @brief The lengths of each side ordered from smallest to longest
 	 */
-	std::array<double, 3> sideLengths;
+	std::array<float, 3> sideLengths;
 };
 }

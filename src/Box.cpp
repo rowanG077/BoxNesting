@@ -5,7 +5,7 @@
 
 namespace BoxNesting
 {
-Box::Box(const std::array<double, 3>& sideLengths) : sideLengths(sideLengths)
+Box::Box(const std::array<float, 3>& sideLengths) : sideLengths(sideLengths)
 {
 	std::sort(this->sideLengths.begin(), this->sideLengths.end());
 

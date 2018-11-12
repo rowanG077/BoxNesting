@@ -8,9 +8,9 @@ SCENARIO("A graph of boxes add edged and check if no vertex has an edge to itsse
 	{
 		Graph::Graph<BoxNesting::Box> graph;
 
-		auto a = Graph::Vertex(BoxNesting::Box({0.6, 0.6, 0.61}));
-		auto b = Graph::Vertex(BoxNesting::Box({0.6, 0.6, 0.51}));
-		auto c = Graph::Vertex(BoxNesting::Box({0.6, 0.51, 0.6}));
+		auto a = Graph::Vertex(BoxNesting::Box({0.6f, 0.6f, 0.61f}));
+		auto b = Graph::Vertex(BoxNesting::Box({0.6f, 0.6f, 0.51f}));
+		auto c = Graph::Vertex(BoxNesting::Box({0.6f, 0.51f, 0.6f}));
 
 		graph.addVertex(a);
 		graph.addVertex(b);
