@@ -1,6 +1,6 @@
 #include <BoxNesting/Parser.hpp>
 
-#include <climits>
+#include <limits>
 #include <regex>
 #include <sstream>
 #include <string>
@@ -13,11 +13,12 @@ std::vector<Box> Parser::getBoxes(std::istream& inputStream)
 	std::getline(inputStream, inputLine);
 
 	uint16_t boxCount = 0;
+	static const auto max = std::numeric_limits<std::uint16_t>::max();
 	try {
 		auto tmp = std::stoi(inputLine);
-		if (tmp <= 0) {
+		if (tmp <= 0 || tmp > max) {
 			std::stringstream ss;
-			ss << "Amount of boxes is smaller then 1. Got: \"" << tmp << "\"";
+			ss << "Amount of boxes is smaller then 1 or too large max allowed: " << max << ". Got: \"" << tmp << "\"";
 			throw ParserError(ss.str());
 		}
 		boxCount = static_cast<uint16_t>(tmp);
@@ -27,7 +28,7 @@ std::vector<Box> Parser::getBoxes(std::istream& inputStream)
 		throw ParserError(ss.str(), e);
 	} catch (const std::out_of_range& e) {
 		std::stringstream ss;
-		ss << "Number of boxes is too large to handle for this program, max allowed: " << ULONG_MAX;
+		ss << "Number of boxes is too large to handle for this program, max allowed: " << max;
 		throw ParserError(ss.str(), e);
 	}
 
