@@ -12,5 +12,8 @@ foreach(file
 		$<TARGET_OBJECTS:${PROJECT_NAME}_obj>
 		$<TARGET_OBJECTS:test_obj>)
 
+	target_include_directories("test_${file}" PUBLIC
+		"${PROJECT_SOURCE_DIR}/src")
+
 	add_test("${file}" "test_${file}")
 endforeach(file)

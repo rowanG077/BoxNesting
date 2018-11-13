@@ -1,4 +1,4 @@
-#include <BoxNesting/Box.hpp>
+#include "Box.hpp"
 
 #include <algorithm>
 #include <sstream>

@@ -1,4 +1,4 @@
-#include <BoxNesting/Box.hpp>
+#include <Box.hpp>
 #include <catch2/catch.hpp>
 
 SCENARIO("Box construction and valid side lengths")

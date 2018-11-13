@@ -33,8 +33,6 @@ if(CMAKE_BUILD_TYPE STREQUAL "Release")
 	endif()
 endif()
 
-include_directories(BEFORE include)
-
 if(${COVERAGE})
 	include(coverage)
 endif()

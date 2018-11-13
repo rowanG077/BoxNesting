@@ -1,6 +1,6 @@
-#include <BoxNesting/Algorithm.hpp>
-#include <BoxNesting/Parser.hpp>
-#include <BoxNesting/version.hpp>
+#include "Algorithm.hpp"
+#include "Parser.hpp"
+#include "version.hpp"
 
 #include <cstdlib>
 #include <iostream>
@@ -54,7 +54,7 @@ void printHelp(const std::string& progName)
 }
 
 int main(int argc, char** argv)
-{	
+{
 	// Because ptr arithmatic is not allowed but we need it here
 	// to access program arguments we exclude no lint here
 	std::vector<std::string> arguments(argv, argv + argc); // NOLINT

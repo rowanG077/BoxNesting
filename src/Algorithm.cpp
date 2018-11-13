@@ -1,7 +1,7 @@
+#include "Algorithm.hpp"
+
 #include <algorithm>
 #include <vector>
-
-#include <BoxNesting/Algorithm.hpp>
 
 /**
  * @brief Contains code for the boxnesting problem

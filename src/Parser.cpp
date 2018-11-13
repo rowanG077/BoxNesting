@@ -1,5 +1,6 @@
-#include <BoxNesting/Parser.hpp>
+#include "Parser.hpp"
 
+#include <cstdint>
 #include <limits>
 #include <regex>
 #include <sstream>
