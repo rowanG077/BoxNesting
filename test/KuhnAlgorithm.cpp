@@ -1,4 +1,4 @@
-#include <Algorithm.hpp>
+#include <KuhnAlgorithm.hpp>
 #include <catch2/catch.hpp>
 
 #define CATCH_CONFIG_MAIN
@@ -10,7 +10,7 @@ SCENARIO("Running the 'graph creation from a set of boxes' function")
 		std::vector<BoxNesting::Box> boxes{BoxNesting::Box({0.9f, 0.9f, 0.9f}), BoxNesting::Box({0.8f, 0.8f, 0.8f}),
 			BoxNesting::Box({0.7f, 0.7f, 0.7f}), BoxNesting::Box({0.6f, 0.6f, 0.6f})};
 
-		BoxNesting::Algorithm boxNestingAlgorithm(boxes);
+		BoxNesting::KuhnAlgorithm boxNestingAlgorithm(boxes);
 
 		THEN("Only one visible box remains after nesting")
 		{
@@ -31,8 +31,8 @@ SCENARIO("Running the 'graph creation from a set of boxes' function")
 
 		THEN("One less box is visible after nesting")
 		{
-			BoxNesting::Algorithm boxNestingAlgorithm1(boxes1);
-			BoxNesting::Algorithm boxNestingAlgorithm2(boxes2);
+			BoxNesting::KuhnAlgorithm boxNestingAlgorithm1(boxes1);
+			BoxNesting::KuhnAlgorithm boxNestingAlgorithm2(boxes2);
 
 			auto result1 = boxNestingAlgorithm1.runAlgorithm();
 			REQUIRE(result1 == (boxes1.size() - 1));
@@ -51,7 +51,7 @@ SCENARIO("Running the 'graph creation from a set of boxes' function")
 
 		THEN("Only one visible box remains after nesting")
 		{
-			BoxNesting::Algorithm boxNestingAlgorithm(boxes);
+			BoxNesting::KuhnAlgorithm boxNestingAlgorithm(boxes);
 			auto result = boxNestingAlgorithm.runAlgorithm();
 			REQUIRE(result == 1);
 		}
@@ -67,7 +67,7 @@ SCENARIO("Running the 'graph creation from a set of boxes' function")
 
 		THEN("Only one visible box remains after nesting")
 		{
-			BoxNesting::Algorithm boxNestingAlgorithm(boxes);
+			BoxNesting::KuhnAlgorithm boxNestingAlgorithm(boxes);
 			auto result = boxNestingAlgorithm.runAlgorithm();
 			REQUIRE(result == boxes.size());
 		}

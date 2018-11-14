@@ -1,4 +1,5 @@
-#include "Algorithm.hpp"
+#include "HopcroftKarpAlgorithm.hpp"
+#include "KuhnAlgorithm.hpp"
 #include "Parser.hpp"
 #include "version.hpp"
 
@@ -73,7 +74,7 @@ int main(int argc, char** argv)
 		return EXIT_SUCCESS;
 	}
 
-	BoxNesting::Algorithm boxNestingAlgorithm(BoxNesting::Parser::getBoxes(std::cin));
+	BoxNesting::HopcroftKarpAlgorithm boxNestingAlgorithm(BoxNesting::Parser::getBoxes(std::cin));
 
 	std::cout << boxNestingAlgorithm.runAlgorithm() << std::endl;
 

@@ -3,6 +3,7 @@
 #include "Box.hpp"
 
 #include <cstdint>
+#include <limits>
 #include <vector>
 
 /**
@@ -13,20 +14,20 @@ namespace BoxNesting
 /**
  * @brief class that contains the boxnesting algorithm
  */
-class Algorithm
+class HopcroftKarpAlgorithm
 {
 public:
 	/**
 	 * @brief Deleted default constructor
 	 */
-	Algorithm() = delete;
+	HopcroftKarpAlgorithm() = delete;
 
 	/**
 	 * @brief Construct a new Algorithm object
 	 *
 	 * @param boxes The boxes to generate the internal graph for
 	 */
-	explicit Algorithm(const std::vector<Box>& boxes);
+	explicit HopcroftKarpAlgorithm(const std::vector<Box>& boxes);
 
 	/**
 	 * @brief function that runs the boxNesting algorithm and returns the number
@@ -39,20 +40,12 @@ public:
 	[[nodiscard]] int16_t runAlgorithm() const;
 
 private:
-	/**
-	 * @brief Run the kuhn algorithm. It's based on the DFS and will try to find
-	 *        chains of maximum length.
-	 *
-	 * @param vertex The index of the vertex in the left part of the
-	 *               Bipartite graph to start running the algorithm from
-	 *
-	 * @return Whether a chain could be made
-	 */
-	bool kuhn(int16_t vertex) const;
+	bool bfs() const;
+	bool dfs(int16_t vertex) const;
 
 private:
 	/**
-	 * @brief Graph generated from the boxes in adjacency list format
+	 * @brief adjacencyList of left vertices generated from the boxes
 	 *		  First index on vector is a vertex on the left side of the bipartite graph
 	 *        and the vector on that index contains indices of vertex on the right side of
 	 *        of the graph where an edge exists between them.
@@ -70,10 +63,14 @@ private:
 	int16_t rightVerticesCount;
 
 	/**
-	 * @brief Contains whether a vertex was allready explored during a single
-	 *        run of finding augmenting paths
+	 * @brief The index of the NILL node in the left part of the bipartite graph  
 	 */
-	mutable std::vector<bool> used;
+	int16_t NILL; // NOLINT
+
+	/**
+	 * @brief Used as marker for infinite distance
+	 */
+	int16_t INFINITE = std::numeric_limits<int16_t>::max(); // NOLINT
 
 	/**
 	 * @brief Contains whether vertices on the left side of the bipartite graph are
@@ -90,6 +87,11 @@ private:
 	 *        is matched to it. -1 indicates no match
 	 */
 	mutable std::vector<int16_t> pairsRight;
+
+	/**
+	 * @brief Stores distances of left vertices
+	 */
+	mutable std::vector<int16_t> distances;
 };
 
 } // namespace BoxNesting

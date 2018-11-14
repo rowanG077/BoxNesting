@@ -1,4 +1,4 @@
-#include "Algorithm.hpp"
+#include "KuhnAlgorithm.hpp"
 
 #include <algorithm>
 
@@ -7,7 +7,7 @@
  */
 namespace BoxNesting
 {
-Algorithm::Algorithm(const std::vector<Box>& boxes)
+KuhnAlgorithm::KuhnAlgorithm(const std::vector<Box>& boxes)
 {
 	// In the boxes case left and right vertices are the same amount since
 	// they are the amount of boxes
@@ -30,7 +30,7 @@ Algorithm::Algorithm(const std::vector<Box>& boxes)
 	}
 }
 
-int16_t Algorithm::runAlgorithm() const
+int16_t KuhnAlgorithm::runAlgorithm() const
 {
 	bool pathFound;
 	do {
@@ -58,7 +58,7 @@ int16_t Algorithm::runAlgorithm() const
 	return visibleBoxes;
 }
 
-bool Algorithm::kuhn(int16_t vertex) const
+bool KuhnAlgorithm::kuhn(int16_t vertex) const
 {
 	if (this->used[vertex]) {
 		return false;
