@@ -6,7 +6,7 @@ add_library(test_obj OBJECT
 
 # add all tests on this level separately
 foreach(file
-		Box Parser BipartiteGraph Algorithm)
+		Box Parser Algorithm)
 	add_executable("test_${file}"
 		"${file}.cpp"
 		$<TARGET_OBJECTS:${PROJECT_NAME}_obj>

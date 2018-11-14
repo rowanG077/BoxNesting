@@ -5,46 +5,16 @@
 
 SCENARIO("Running the 'graph creation from a set of boxes' function")
 {
-	BoxNesting::Algorithm boxNestingAlgorithm;
-
-	GIVEN("A set of boxes")
-	{
-		std::vector<BoxNesting::Box> boxes{BoxNesting::Box({0.6f, 0.6f, 0.6f}), BoxNesting::Box({0.7f, 0.7f, 0.7f}),
-			BoxNesting::Box({0.8f, 0.8f, 0.8f})};
-
-		WHEN("Creating a graph from the set of boxes")
-		{
-			const auto graph = boxNestingAlgorithm.createGraphFromBoxes(boxes);
-
-			THEN("There can only be edges from vertex a to b if a nests inside b")
-			{
-				const auto& lv = graph.getLeftVertices();
-				const auto& rv = graph.getRightVertices();
-				for (uint16_t i = 0; i < lv.size(); ++i) {
-					for (uint16_t j = 0; j < rv.size(); ++j) {
-						if (graph.isEdgeBetween(i, j)) {
-							auto& v1 = lv.at(i);
-							auto& v2 = rv.at(j);
-
-							auto isNestable = v1.getContent().isNestable(v2.getContent())
-								|| v2.getContent().isNestable(v1.getContent());
-
-							REQUIRE(isNestable);
-						}
-					}
-				}
-			}
-		}
-	}
-
 	GIVEN("A set of boxes where every box except for one can nest inside another")
 	{
 		std::vector<BoxNesting::Box> boxes{BoxNesting::Box({0.9f, 0.9f, 0.9f}), BoxNesting::Box({0.8f, 0.8f, 0.8f}),
 			BoxNesting::Box({0.7f, 0.7f, 0.7f}), BoxNesting::Box({0.6f, 0.6f, 0.6f})};
 
+		BoxNesting::Algorithm boxNestingAlgorithm(boxes);
+
 		THEN("Only one visible box remains after nesting")
 		{
-			auto result = boxNestingAlgorithm.runAlgorithm(boxes);
+			auto result = boxNestingAlgorithm.runAlgorithm();
 			REQUIRE(result == 1);
 		}
 	}
@@ -61,9 +31,12 @@ SCENARIO("Running the 'graph creation from a set of boxes' function")
 
 		THEN("One less box is visible after nesting")
 		{
-			auto result1 = boxNestingAlgorithm.runAlgorithm(boxes1);
+			BoxNesting::Algorithm boxNestingAlgorithm1(boxes1);
+			BoxNesting::Algorithm boxNestingAlgorithm2(boxes2);
+
+			auto result1 = boxNestingAlgorithm1.runAlgorithm();
 			REQUIRE(result1 == (boxes1.size() - 1));
-			auto result2 = boxNestingAlgorithm.runAlgorithm(boxes2);
+			auto result2 = boxNestingAlgorithm2.runAlgorithm();
 			REQUIRE(result2 == (boxes2.size() - 1));
 		}
 	}
@@ -78,7 +51,8 @@ SCENARIO("Running the 'graph creation from a set of boxes' function")
 
 		THEN("Only one visible box remains after nesting")
 		{
-			auto result = boxNestingAlgorithm.runAlgorithm(boxes);
+			BoxNesting::Algorithm boxNestingAlgorithm(boxes);
+			auto result = boxNestingAlgorithm.runAlgorithm();
 			REQUIRE(result == 1);
 		}
 	}
@@ -93,7 +67,8 @@ SCENARIO("Running the 'graph creation from a set of boxes' function")
 
 		THEN("Only one visible box remains after nesting")
 		{
-			auto result = boxNestingAlgorithm.runAlgorithm(boxes);
+			BoxNesting::Algorithm boxNestingAlgorithm(boxes);
+			auto result = boxNestingAlgorithm.runAlgorithm();
 			REQUIRE(result == boxes.size());
 		}
 	}

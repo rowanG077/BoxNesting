@@ -53,7 +53,7 @@ SCENARIO("Parsing box specifcations from inputStream")
 			std::stringstream stream;
 			THEN("a ParserError is thrown")
 			{
-				stream << (std::numeric_limits<std::uint16_t>::max() + 1) << std::endl;
+				stream << (std::numeric_limits<std::int16_t>::max()) << std::endl;
 				REQUIRE_THROWS_AS(BoxNesting::Parser::getBoxes(stream), BoxNesting::ParserError);
 				stream.str(std::string());
 				stream << std::numeric_limits<std::uint64_t>::max() << std::endl;

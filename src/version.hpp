@@ -7,7 +7,7 @@
 /** Defines the project author */
 #define BOXNESTING_AUTHOR "Ties Klappe & Rowan Goemans"
 /** Defines the human-readable project version string (e.g. a.b.c.d-123+) */
-#define BOXNESTING_VERSION "1.0.0-871b6ad+"
+#define BOXNESTING_VERSION "1.0.0-a56672a+"
 /** Defines the project major version number */
 #define BOXNESTING_VERSION_MAJOR 1
 /** Defines the project major version number */

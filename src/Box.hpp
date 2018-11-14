@@ -59,21 +59,19 @@ public:
 	explicit Box(const std::array<float, 3>& sideLengths);
 
 	/**
-	 * @brief Check if this box can nest inside other box
+	 * @brief Compare two boxes by checking if they can nest inside eachother
 	 *
-	 * @param b The box to check if this box can nest inside
-	 * @return True if this box can nest inside the passed box, False otherwise
+	 * @param b The box compare this instance to
+	 * @return True if this box can nest inside box b
 	 */
-	[[nodiscard]] bool isNestable(const Box& b) const;
+	[[nodiscard]] bool operator<(const Box& b) const;
 
 	/**
 	 * @brief Get the side lengths of the box
 	 *
 	 * @return array containing the side lengths ordered from smallest to largest
 	 */
-	[[nodiscard]] const std::array<float, 3>& getSideLengths() const {
-		return this->sideLengths;
-	}
+	[[nodiscard]] const std::array<float, 3>& getSideLengths() const;
 
 	/**
 	 * @brief The minimum length that a side of a box may have
@@ -88,7 +86,7 @@ public:
 	static constexpr float maxLength = 1.0;
 
 	/**
-	 * @brief Static assert on the assumption any box can only contain a single box nested inside
+	 * @brief Static assert on the assumption any box can only contain a maximum single box nested inside
 	 */
 	static_assert(minLength * 2 >= maxLength,
 		"More then 1 box can be fit inside a larger box. "

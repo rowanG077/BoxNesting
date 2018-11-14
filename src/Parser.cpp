@@ -13,8 +13,8 @@ std::vector<Box> Parser::getBoxes(std::istream& inputStream)
 	std::string inputLine;
 	std::getline(inputStream, inputLine);
 
-	uint16_t boxCount = 0;
-	static const auto max = std::numeric_limits<std::uint16_t>::max();
+	int16_t boxCount = 0;
+	static const auto max = std::numeric_limits<std::int16_t>::max() - 1;
 	try {
 		auto tmp = std::stoi(inputLine);
 		if (tmp <= 0 || tmp > max) {

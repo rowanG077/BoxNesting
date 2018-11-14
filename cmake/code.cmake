@@ -7,11 +7,14 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_EXTENSIONS ON)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# disable sign compare since we use only signed integers types
+add_compile_options(-Wno-sign-compare)
+
 # set warning flags for debug
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
 	if(CMAKE_C_COMPILER_ID STREQUAL "Clang" OR
 		CMAKE_C_COMPILER_ID STREQUAL "GNU")
-		add_compile_options(-Wall -Wextra -Wconversion)
+		add_compile_options(-Wall -Wextra)
 		if(${WERROR})
 			add_compile_options(-Werror)
 		endif()

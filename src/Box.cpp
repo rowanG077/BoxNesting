@@ -22,14 +22,21 @@ Box::Box(const std::array<float, 3>& sideLengths) : sideLengths(sideLengths)
 	}
 }
 
-bool Box::isNestable(const Box& b) const
+bool Box::operator<(const Box& b) const
 {
-	for (std::size_t i = 0; i < this->sideLengths.size(); ++i) {
-		if (this->sideLengths.at(i) >= b.sideLengths.at(i)) {
+	const auto sz = this->sideLengths.size();
+	for (uint8_t i = 0; i < sz; ++i) {
+		if (this->sideLengths[i] >= b.sideLengths[i]) {
 			return false;
 		}
 	}
 
 	return true;
 }
+
+const std::array<float, 3>& Box::getSideLengths() const
+{
+	return this->sideLengths;
+}
+
 } // BoxNesting

@@ -1,4 +1,4 @@
-Checks: '*,-google-runtime-references,-fuchsia-default-arguments,-google-readability-namespace-comments,-hicpp-deprecated-headers,-llvm-header-guard,-llvm-namespace-comment,-modernize-deprecated-headers,-fuchsia-overloaded-operator'
+Checks: '*,-google-runtime-references,-fuchsia-default-arguments,-clang-diagnostic-sign-compare,-google-readability-namespace-comments,-cppcoreguidelines-pro-bounds-constant-array-index,-hicpp-deprecated-headers,-llvm-header-guard,-llvm-namespace-comment,-modernize-deprecated-headers,-fuchsia-overloaded-operator'
 WarningsAsErrors: ''
 HeaderFilterRegex: '.*'
 AnalyzeTemporaryDtors: false

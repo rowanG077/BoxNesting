@@ -4,6 +4,7 @@
 
 #include <cstdlib>
 #include <iostream>
+#include <sstream>
 
 void printVersion()
 {
@@ -72,11 +73,9 @@ int main(int argc, char** argv)
 		return EXIT_SUCCESS;
 	}
 
-	const auto boxes = BoxNesting::Parser::getBoxes(std::cin);
+	BoxNesting::Algorithm boxNestingAlgorithm(BoxNesting::Parser::getBoxes(std::cin));
 
-	BoxNesting::Algorithm boxNestingAlgorithm;
-
-	std::cout << boxNestingAlgorithm.runAlgorithm(boxes) << std::endl;
+	std::cout << boxNestingAlgorithm.runAlgorithm() << std::endl;
 
 	return EXIT_SUCCESS;
 }
