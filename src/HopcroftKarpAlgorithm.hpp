@@ -65,12 +65,12 @@ private:
 	/**
 	 * @brief The index of the NILL node in the left part of the bipartite graph  
 	 */
-	int16_t NILL; // NOLINT
+	static const int16_t NILL; // NOLINT
 
 	/**
 	 * @brief Used as marker for infinite distance
 	 */
-	int16_t INFINITE = std::numeric_limits<int16_t>::max(); // NOLINT
+	static const int16_t INF; // NOLINT
 
 	/**
 	 * @brief Contains whether vertices on the left side of the bipartite graph are
