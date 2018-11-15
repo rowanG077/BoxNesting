@@ -1,4 +1,4 @@
 /build/
 /build_*/
-/include/*/version.hpp
+/src/version.hpp
 .vscode/
