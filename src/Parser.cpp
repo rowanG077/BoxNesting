@@ -14,15 +14,15 @@ std::vector<Box> Parser::getBoxes(std::istream& inputStream)
 	std::getline(inputStream, inputLine);
 
 	int16_t boxCount = 0;
-	static const auto max = std::numeric_limits<std::int16_t>::max() - 1;
+	static const auto max = 5000;
 	try {
 		auto tmp = std::stoi(inputLine);
 		if (tmp <= 0 || tmp > max) {
 			std::stringstream ss;
-			ss << "Amount of boxes is smaller then 1 or too large max allowed: " << max << ". Got: \"" << tmp << "\"";
+			ss << "Amount of boxes is smaller then 1 or too large, max allowed: " << max << ". Got: \"" << tmp << "\"";
 			throw ParserError(ss.str());
 		}
-		boxCount = static_cast<uint16_t>(tmp);
+		boxCount = static_cast<int16_t>(tmp);
 	} catch (const std::invalid_argument& e) {
 		std::stringstream ss;
 		ss << "Expected number to indicate amount of boxes to take from input. Got: \"" << inputLine << "\"";
@@ -33,7 +33,8 @@ std::vector<Box> Parser::getBoxes(std::istream& inputStream)
 		throw ParserError(ss.str(), e);
 	}
 
-	auto boxes = std::vector<Box>();
+	std::vector<Box> boxes;
+	boxes.reserve(boxCount);
 	for (std::size_t i = 0; i < boxCount; ++i) {
 		boxes.emplace_back(parseBoxSpecification(inputStream));
 	}
